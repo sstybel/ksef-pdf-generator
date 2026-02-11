@@ -45,9 +45,9 @@ ksef-pdf-generator.exe assets/invoice.xml -o output.pdf
 
 &nbsp;
 
-![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png")
+![Example Screen-Shot ](https://github.com/sstybel/blob/main/ksef-pdf-generator/blob/main/images/screen01.png")
 
-> Click to see a sample [**PDF**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.pdf) invoice generated based on the [**KSeF XML**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.pdf) file.
+> Click to see a sample [**PDF**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.pdf) invoice generated based on the [**KSeF XML**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.xml file.
 
 
 &nbsp;
