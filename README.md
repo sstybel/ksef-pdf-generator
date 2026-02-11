@@ -45,6 +45,13 @@ ksef-pdf-generator.exe assets/invoice.xml -o output.pdf
 
 &nbsp;
 
+
+
+Click to see a sample [**PDF**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.pdf) invoice generated based on the [**KSeF XML**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.pdf) file.
+
+
+&nbsp;
+
 ---
 
 ## Copyright &copy; 2025 - 2026 by Sebastian Stybel, [www.BONO.Edu.PL](https://www.bono.edu.pl/)
