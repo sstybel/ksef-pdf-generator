@@ -10,6 +10,10 @@ The repository of this tool is based on a fork originating from:
 
 This application only creates visualizations of **KSeF invoices** in **XML** format downloaded from the **National e-Invoice System** (e.g., using the tool [**KSeF XML Downloader**](https://github.com/sstybel/ksef-xml-download)). The generated invoices contain a **QR code** that can be used to check whether your invoice is in the **KSeF** system.
 
+![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
+
+> Click to see a sample [**PDF**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.pdf) invoice generated based on the [**KSeF XML**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.xml) file.
+
 ## Syntax of the `ksef-pdf-generator.exe`
 
 **Usage:** `ksef-pdf-generator.exe` [`options`] `<ksef-xml-file>`
