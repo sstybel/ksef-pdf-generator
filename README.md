@@ -1,8 +1,8 @@
-# KSeF PDF Generator
+# KS<font color="red">e</font>F PDF Generator
 
 <a href="https://github.com/sstybel/ksef-pdf-generator/releases/latest"><img alt="Static Badge" src="https://img.shields.io/badge/download-red?style=for-the-badge&label=stable&color=%23FF0000&link=https%3A%2F%2Fgithub.com%2Fsstybel%2Fksef-pdf-generator%2Freleases%2Flatest"></a> ![GitHub Release](https://img.shields.io/github/v/release/sstybel/ksef-pdf-generator?sort=date&display_name=release&style=for-the-badge&logo=github&label=release&link=https%3A%2F%2Fgithub.com%2Fsstybel%2Fksef-pdf-generator) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/sstybel/ksef-pdf-generator/total?style=for-the-badge&logo=github&link=https%3A%2F%2Fgithub.com%2Fsstybel%2Fksef-pdf-generator)
 
-A tool for generating visualizations of invoices in **PDF** format based on **XML** invoice files downloaded from the National e-Invoice System ([**KSeF** - **K**rajowy **S**ystem **e-F**aktur](https://ksef.podatki.gov.pl/)) - https://ksef.podatki.gov.pl/.
+A tool for generating visualizations of invoices in **PDF** format based on **XML** invoice files downloaded from the National e-Invoice System ([**KS<font color="red">e</font>F** - **K**rajowy **S**ystem **<font color="red">e</font>-F**aktur](https://ksef.podatki.gov.pl/)) - https://ksef.podatki.gov.pl/.
 
 The repository of this tool is based on a fork originating from:
 1. https://github.com/CIRFMF/ksef-pdf-generator ([**@CIRF**](https://github.com/CIRFMF))
