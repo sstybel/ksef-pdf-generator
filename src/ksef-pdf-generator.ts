@@ -74,7 +74,7 @@ Attention:
   - Number of KSeF is automatically detected from the XML filename
     Format: <nip>-<date>-<hash>-<crc_code>.xml (e.g. 0101010101-20260201-1A2B3C456D7E-F8.xml)
   - If the number of KSeF is not found, the value "NONE" is used
-  - QR code is generated based on the KSeF number and  if number of KSeF is not found,
+  - QR code is generated based on the KSeF number and if number of KSeF is not found,
     the value of KSeF used "NONE" value and QR code use value "0101010101-20260201-1A2B3C456D7E-F8"
     of KSeF number as default values to generate QR code
 
