@@ -68,7 +68,7 @@ A tool for generating PDF documents from KSeF XML files.
 
 Options:
   [-o], [--output] [<ksef-pdf-file>]     Path to output PDF file (default: like name XML file with changed extension to .pdf)
-  -h, --help                       Show this help message
+  -h, --help                             Show this help message
 
 Attention:
   - Number of KSeF is automatically detected from the XML filename
