@@ -19,7 +19,7 @@ This application only creates visualizations of **KSeF invoices** in **XML** for
 **Usage:** `ksef-pdf-generator.exe` [`options`] `<ksef-xml-file>`
 
 **Options:**
-* [`-o`], [`--output`] [`<ksef-xml-file>`] - Path to the output **PDF** file (default: **XML** file name changed to **.pdf**)
+* [`-o`], [`--output`] [`<ksef-pdf-file>`] - Path to the output **PDF** file (default: **XML** file name changed to **.pdf**)
 * `-h`, `--help` - Display this help message
 
 **Notes:**

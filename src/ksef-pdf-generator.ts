@@ -67,7 +67,7 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO.Edu.PL
 A tool for generating PDF documents from KSeF XML files.
 
 Options:
-  -o, --output <ksef-xml-file>     Path to output PDF file (default: like name XML file with changed extension to .pdf)
+  [-o], [--output] [<ksef-pdf-file>]     Path to output PDF file (default: like name XML file with changed extension to .pdf)
   -h, --help                       Show this help message
 
 Attention:
