@@ -16,9 +16,10 @@ This application only creates visualizations of **KSeF invoices** in **XML** for
 
 ## Syntax of the `ksef-pdf-generator.exe`
 
-**Usage:** `ksef-pdf-generator.exe` [`options`] `<ksef-xml-file>`
+**Usage:** `ksef-pdf-generator.exe` `<ksef-xml-file>` [`options`]
 
 **Options:**
+* [-s], [-state] [X:\\path\\output-json.json] - Convert KSeF XML invoices to **PDFs** based on the state of the downloaded KSeF **XML** invoices by the tool [**KSeF XML Downloader**](https://github.com/sstybel/ksef-xml-download)
 * [`-o`], [`--output`] [`<ksef-pdf-file>`] - Path to the output **PDF** file (default: **XML** file name changed to **.pdf**)
 * `-h`, `--help` - Display this help message
 
@@ -26,6 +27,7 @@ This application only creates visualizations of **KSeF invoices** in **XML** for
 * The **KSeF number** is automatically detected from the **XML** file name. Format: `<nip>-<date>-<hash>-<codec_crc>.xml` (e.g., `0101010101-20260201-1A2B3C456D7E-F8.xml`)
 * If the **KSeF number** is not found, the value **“NONE”** is used.
 * The **QR code** is generated based on the **KSeF number**. If the **KSeF number** is not found, the **KSeF** value will be used as **“NONE”** and the **QR code** will use **“`0101010101-20260201-1A2B3C456D7E-F8`”** (**KSeF number**) as the default value for generating the **QR code**.
+* If you use the [**KSeF XML Downloader**](https://github.com/sstybel/ksef-xml-download) to generate invoices based on the status of downloaded invoices, the **PDF** invoice visualizations will be saved in the same location as the **KSeF XML** invoice files. The invoice name will be the same as the **KSeF XML** invoice file, with the extension changed from **XML** to **PDF**.
 
 ## Examples
 
@@ -35,18 +37,32 @@ This application only creates visualizations of **KSeF invoices** in **XML** for
 ksef-pdf-generator.exe 0101010101-20260201-1A2B3C456D7E-F8.xml
 ```
 
-> <br> Output file: `0101010101-20260201-1A2B3C456D7E-F8.pdf`
+> <br> Output file: `.\0101010101-20260201-1A2B3C456D7E-F8.pdf`
 >
 > &nbsp;
 
 ```sh 
-ksef-pdf-generator.exe assets/invoice.xml -o output.pdf
+ksef-pdf-generator.exe .\assets\invoice.xml -o output.pdf
 ```
 
-> <br> Output file: `output.pdf`
+> <br> Output file: `.\output.pdf`
 > 
 > &nbsp;
 
+```sh 
+ksef-pdf-generator.exe -s d:\\_ksef_\\ksef_invoices-output-json_20260217112540.json
+```
+
+> <br> Output file(s): 
+> 
+> `d:\\_ksef_\\0101010101-20260201-1A2B3C456D7A-F8.pdf`
+> `d:\\_ksef_\\2020202020-20260202-1A2B3C456D7B-C9.pdf`
+> 
+> `...`
+> 
+> `d:\\_ksef_\\1919191919-20260209-1A2B3C456D7C-5A.pdf`
+> 
+> &nbsp;
 &nbsp;
 
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
