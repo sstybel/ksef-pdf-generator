@@ -12,6 +12,10 @@ This application only creates visualizations of **KSeF invoices** in **XML** for
 
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
+&nbsp;
+
+![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen02.png)
+
 > Click to see a sample [**PDF**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.pdf) invoice generated based on the [**KSeF XML**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.xml) file.
 
 ## Syntax of the `ksef-pdf-generator.exe`
@@ -66,6 +70,10 @@ ksef-pdf-generator.exe -s d:\\_ksef_\\ksef_invoices-output-json_20260217112540.j
 &nbsp;
 
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
+
+&nbsp;
+
+![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen02.png)
 
 > Click to see a sample [**PDF**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.pdf) invoice generated based on the [**KSeF XML**](https://github.com/sstybel/ksef-pdf-generator/blob/main/examples/invoice.xml) file.
 
