@@ -91,4 +91,4 @@ ksef-pdf-generator.exe -s d:\\_ksef_\\ksef_invoices-output-json_20260217112540.j
 
 ---
 
-## Copyright &copy; 2025 - 2026 by Sebastian Stybel, [www.BONO.Edu.PL](https://www.bono.edu.pl/)
+## Copyright &copy; 2025 - 2026 by Sebastian Stybel, [www.BONO-IT.pl](https://www.bono-it.pl/)

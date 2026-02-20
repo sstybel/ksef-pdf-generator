@@ -103,7 +103,7 @@ async function main() {
 
       console.log(`
 KSeF PDF Generator - ver. 1.1.0
-Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO.Edu.PL
+Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
     
