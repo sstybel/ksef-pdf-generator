@@ -329,7 +329,8 @@ Example:
         try {
           const buffer = await generateBuffer(pdf);
           writeFileSync(outputFile, buffer);
-          if (!is_q) console.log(`✅ PDF generated successfully: ${outputFile}`);
+          if (is_e) { sh_e = '✅ '; }
+          if (!is_q) console.log(`${sh_e}PDF generated successfully: ${outputFile}`);
         } catch (error) {
           if (is_e) { sh_e = '❌ '; }
           if (!is_q) console.error(sh_e + 'Error while saving PDF:', error);
