@@ -12,6 +12,10 @@ This application only creates visualizations of **KSeF invoices** in **XML** for
 
 Starting with version [**1.1.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.1.0), it is now possible to convert KSeF **XML** invoices to **PDF** files based on the status of downloaded KSeF **XML** invoices using the [**KSeF XML Downloader**](https://github.com/sstybel/ksef-xml-download) tool . The [**KSeF XML Downloader**](https://github.com/sstybel/ksef-xml-download) tool saves the result of its operation, among other things, to a **JSON** file, which contains, among other things, the location of invoices in KSeF **XML** format. This file (**JSON**) can now be used as a source to indicate the location of **KSeF XML** invoice files.
 
+Since version [**1.2.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.2.0), two parameters have been added:
+* Silent mode (default: disabled)
+* Show emoticons (default: disabled)
+
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
 &nbsp;
