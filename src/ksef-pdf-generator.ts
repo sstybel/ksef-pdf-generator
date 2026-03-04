@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-import { readFile, readFileSync, writeFile, writeFileSync } from 'fs';
-import { resolve } from 'path';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { xml2js } from 'xml-js';
 import { generateFA1 } from './lib-public/FA1-generator';
 import { generateFA2 } from './lib-public/FA2-generator';
@@ -11,8 +10,7 @@ import { Faktura as Faktura3 } from './lib-public/types/fa3.types';
 import { AdditionalDataTypes } from './lib-public/types/common.types';
 import Base64url from "crypto-js/enc-base64url"
 import SHA256 from "crypto-js/sha256";
-import { a } from 'vitest/dist/chunks/suite.d.FvehnV49';
-import { i } from 'vite/dist/node/chunks/moduleRunnerTransport';
+import { TCreatedPdf } from 'pdfmake/build/pdfmake';
 
 interface ksefSeller {
   nip: string;
@@ -107,7 +105,7 @@ async function main() {
    
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
-KSeF PDF Generator - ver. 1.2.0
+KSeF PDF Generator - ver. 1.3.0
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -149,7 +147,7 @@ Example:
   let is_o = false;
   let is_s = false;
   let inputFiles = [];
-  let pdf: pdfMake.TCreatedPdf;
+  let pdf: TCreatedPdf;
   
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -171,7 +169,7 @@ Example:
   }
 
   if (!is_q) console.log(`
-KSeF PDF Generator - ver. 1.2.0
+KSeF PDF Generator - ver. 1.3.0
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -228,7 +226,10 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
       const dataSubject = ksefData[dataSubjects as keyof ksefSubjects];
       for (const data of dataSubject) {
         const xmlFilePath = data.fileName;
-        inputFiles.push(xmlFilePath);
+        const xmlInvDate = data.invoicingDate;
+        const xmlInvStor = data.permanentStorageDate;
+        const dictCMLKSeF = {file: xmlFilePath, dateInv: xmlInvDate, dateInvStor: xmlInvStor};
+        inputFiles.push(dictCMLKSeF);
         inputFile = '';
         if (is_e) { sh_e = '📄 '; }
         if (!is_q) console.log(`${sh_e}Added XML file from state: ${xmlFilePath}`);
@@ -247,7 +248,12 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
     if (!is_q) console.error('Use --help to see usage instructions');
     process.exit(1);
   } else {
-    for (inputFile of inputFiles) {
+    let inputData: any;
+    for (inputData of inputFiles) {
+      let inputFile = inputData.file;
+      let inputDateInv = Date.parse(inputData.dateInv);
+      let inputDateInvStor =  Date.parse(inputData.dateInvStor);
+
       if (!is_o) {
         outputFile = inputFile.substring(0, inputFile.length - 4) + '.pdf';
       }
@@ -274,12 +280,15 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
         if (is_e) { sh_e = '📄 '; }
         if (!is_q) console.log(`${sh_e}Parsing XML: ${inputFile}`);
         const xml: unknown = parseXMLFromFile(inputFile);
-      
+        const namefilexml = inputFile.split("\\").pop();
         const xmlfile = readFileSync(inputFile, 'utf-8');
         const xmlhash = SHA256(xmlfile);
         const xmlhashb64 = Base64url.stringify(xmlhash);
         const qrCode = 'https://qr.ksef.mf.gov.pl/invoice/' + nrNIP + '/' + dataInvoice + '/' + xmlhashb64
         
+        let DataBase64XML = Buffer.from(xmlfile, 'binary').toString('base64');
+        let DataUri = `data:application/xml;base64,${DataBase64XML}`;
+
         if (is_e) { sh_e = '🔑 '; }
         if (!is_q) console.log(`${sh_e}Hash SHA-256 file: ${xmlhash}`);
         if (!is_q) console.log(`${sh_e}Hash SHA-256 file to Base64: ${xmlhashb64}`);
@@ -304,18 +313,6 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
         if (is_e) { sh_e = '🔧 '; }
         if (!is_q) console.log(`${sh_e}Generating PDF...`);
 
-        const generateBuffer = (pdfDoc: any): Promise<Buffer> => {
-          return new Promise((resolve, reject) => {
-            try {
-              pdfDoc.getBuffer((buffer: Buffer) => {
-                resolve(buffer);
-              });
-            } catch (error) {
-              reject(error);
-            }
-          });
-        };      
-
         switch (ksefVersion) {
           case 'FA (1)':
             pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData);
@@ -324,7 +321,7 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
             pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData);
             break;
           case 'FA (3)':
-            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData);
+            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML');
             break;
           default:
             if (is_e) { sh_e = '❌ '; }
@@ -333,7 +330,7 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
         }
 
         try {
-          const buffer = await generateBuffer(pdf);
+          let buffer = await pdf.getBuffer()
           writeFileSync(outputFile, buffer);
           if (is_e) { sh_e = '✅ '; }
           if (!is_q) console.log(`${sh_e}PDF generated successfully: ${outputFile}`);

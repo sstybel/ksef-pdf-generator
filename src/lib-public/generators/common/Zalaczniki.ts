@@ -137,7 +137,7 @@ function createTable(
   const definedHeader: Content[] = cols.map((item: Kol): string | ContentText =>
     formatText(item.NKom?._text, FormatTyp.GrayBoldTitle)
   );
-  const tableBody: TableCell[][] = [];
+  const tableBody: Content[] = [];
 
   getTable(rows).forEach((item: Wiersz): void => {
     const WKom: FP[] = getTable(item.WKom);
@@ -149,16 +149,22 @@ function createTable(
 
     if (cuttedRows.length >= subTableIndex + 1) {
       tableBody.push(
-        cuttedRows[subTableIndex].map((subItem: FP, index: number): TableCell => {
+        cuttedRows[subTableIndex].map((subItem: FP, index: number): Content => {
           return formatText(
             subItem._text ?? '',
             cols[index]._attributes?.Typ ? TableDataType[cols[index]._attributes.Typ] : FormatTyp.Value
-          ) as TableCell;
+          ) as Content;
         })
       );
     }
   });
-  const widths: string[] = definedHeader.map((index: Content): string => (index ? '*' : 'auto'));
+  const widths: Content[] = definedHeader.map((index: Content): string[] => {
+    if (index) {
+      return ['*'];
+    } else {
+      return ['auto'];
+    }
+  });
 
   return {
     table: {

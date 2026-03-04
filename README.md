@@ -7,6 +7,7 @@ A tool for generating visualizations of invoices in **PDF** format based on **XM
 The repository of this tool is based on a fork originating from:
 1. https://github.com/CIRFMF/ksef-pdf-generator ([**@CIRF**](https://github.com/CIRFMF))
 2. https://github.com/aiv/ksef-pdf-generator ([**@aiv (Mariusz Dalewski**](https://github.com/aiv))
+3. https://github.com/niutech/ksef-pdf-generator ([**@niutech (niu tech**](https://github.com/niutech))
 
 This application only creates visualizations of **KSeF invoices** in **XML** format downloaded from the **National e-Invoice System** (e.g., using the tool [**KSeF XML Downloader**](https://github.com/sstybel/ksef-xml-download)). The generated invoices contain a **QR code** that can be used to check whether your invoice is in the **KSeF** system.
 
@@ -15,6 +16,8 @@ Starting with version [**1.1.0 releases**](https://github.com/sstybel/ksef-pdf-g
 Since version [**1.2.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.2.0), two parameters have been added:
 * Silent mode (default: disabled)
 * Show emoticons (default: disabled)
+
+Since version [**1.3.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.3.0), as suggested by [**@niutech**](https://github.com/niutech), to ensure long-term archiving, the **PDF** file is created in accordance with the **PDF/A-3** standard - **ISO 19005-3:2012**.  This standard ensures long-term archiving based on **PDF version 1.7**, which allows any data formats (e.g., **XML**, **CSV**, **CAD**, source **Word files**) to be embedded within the **PDF** file. **PDF** is a *“container”* that combines visual consistency with the original (for viewing) and raw data for automatic processing.
 
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
