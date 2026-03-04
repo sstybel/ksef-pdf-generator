@@ -25,9 +25,11 @@ Starting with version [**1.1.0 releases**](https://github.com/sstybel/ksef-pdf-g
 **Usage:** `ksef-pdf-generator.exe` `<ksef-xml-file>` [`options`]
 
 **Options:**
-* [`-s`], [`-state`] [`X:\path\output-json.json`] - Convert KSeF XML invoices to **PDFs** based on the state of the downloaded KSeF **XML** invoices by the tool [**KSeF XML Downloader**](https://github.com/sstybel/ksef-xml-download)
+* [`-s`], [`--state`] [`X:\path\output-json.json`] - Convert KSeF XML invoices to **PDFs** based on the state of the downloaded KSeF **XML** invoices by the tool [**KSeF XML Downloader**](https://github.com/sstybel/ksef-xml-download)
 * [`-o`], [`--output`] [`<ksef-pdf-file>`] - Path to the output **PDF** file (default: **XML** file name changed to **.pdf**)
-* `-h`, `--help` - Display this help message
+* [`-e`], [`--emo`] - Show emoticons in on-screen messages
+* [`-q`], [`--quiet`] - Quiet mode, does not display messages on the screen
+* [`-h`], [`--help`] - Display this help message
 
 **Notes:**
 * The **KSeF number** is automatically detected from the **XML** file name. Format: `<nip>-<date>-<hash>-<codec_crc>.xml` (e.g., `0101010101-20260201-1A2B3C456D7E-F8.xml`)

@@ -58,6 +58,10 @@ interface ksefSubjects {
   subjects: ksefSubject[];
 }
 
+let is_e = false;
+let sh_e = "";
+let is_q = false;
+
 function extractNrKSeFFromFilename(filename: string): string | null {
   const ksefPattern = /(\d{10}-\d{8}-[A-Z0-9]{12,16}-[A-Z0-9]{2})/i;
   const match = filename.match(ksefPattern);
@@ -101,20 +105,22 @@ function parseXMLFromFile(filePath: string): unknown {
 async function main() {
   const args = process.argv.slice(2);
 
-      console.log(`
-KSeF PDF Generator - ver. 1.1.0
+  if (!is_q) console.log(`
+KSeF PDF Generator - ver. 1.2.0
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
     
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
-    console.log(`Useage: ksef-pdf-generator.exe <ksef-xml-file> [options]
+    if (!is_q) console.log(`Useage: ksef-pdf-generator.exe <ksef-xml-file> [options]
 
 A tool for generating PDF documents from KSeF XML files.
 
 Options:
-  [-s], [-state] [X:\\path\\output-json.json]   Convert KSeF XML invoices to PDFs based on the state of the downloaded KSeF XML invoices by the tool KSeF XML Invoices Downloader 
+  [-s], [--state] [X:\\path\\output-json.json]  Convert KSeF XML invoices to PDFs based on the state of the downloaded KSeF XML invoices by the tool KSeF XML Invoices Downloader 
   [-o], [--output] [<ksef-pdf-file>]          Path to output PDF file (default: like name XML file with changed extension to .pdf)
+  [-e], [--emo]                               Show emoticons in on-screen messages
+  [-q], [--quiet]                             Quiet mode, does not display messages on the screen
   -h, --help                                  Show this help message
 
 Attention:
@@ -151,9 +157,13 @@ Example:
     if (arg === '-o' || arg === '--output') {
       outputFile = args[++i];
 	    is_o = true;
-    } else if (arg === '-s' || arg === '-state') {
+    } else if (arg === '-s' || arg === '--state') {
       stateFile = args[++i];
       is_s = true;
+    } else if (arg === '-e' || arg === '--emo') {
+      is_e = true;
+    } else if (arg === '-q' || arg === '--quiet') {
+      is_q = true;
     } else if (!arg.startsWith('-')) {
       inputFile = arg;
       is_i  = true;
@@ -162,40 +172,47 @@ Example:
 
   if (is_s || is_i) {
     if (!stateFile && is_s) {
-      console.error('❌ Error: You must provide a state JSON file');
-      console.error('Use --help to see usage instructions');
+      if (is_e) { sh_e = '❌ '; }
+      if (!is_q) console.error(sh_e + 'Error: You must provide a state JSON file');
+      if (!is_q) console.error('Use --help to see usage instructions');
       process.exit(1);
     }
     if (is_s && is_i) {
-      console.warn('⚠️  Warning: Input XML file is ignored when using state JSON file');
+      if (is_e) { sh_e = '⚠️  '; }
+      if (!is_q) console.warn(sh_e + 'Warning: Input XML file is ignored when using state JSON file');
       is_i = false;
       inputFile = '';
     }
     if (is_s && is_o) {
-      console.warn('⚠️  Warning: Output file option is ignored when using state JSON file.\n            PDF files will be saved with the same name as XML files with .pdf extension');
+      if (is_e) { sh_e = '⚠️  '; }
+      if (!is_q) console.warn(sh_e + 'Warning: Output file option is ignored when using state JSON file.\n            PDF files will be saved with the same name as XML files with .pdf extension');
       is_o = false;
       outputFile = '';
     }
   }
 
   if (is_i) {
-    console.log(`📖 Input file provided: ${inputFile}`);
+    if (is_e) { sh_e = '📖 '; }
+    if (!is_q) console.log(`${sh_e}Input file provided: ${inputFile}`);
   }
 
   if (is_o) {
-    console.log(`🚪 Output file provided: ${outputFile}`);
+    if (is_e) { sh_e = '🚪 '; }
+    if (!is_q) console.log(`${sh_e}Output file provided: ${outputFile}`);
   }
 
   if (is_s) {
-    console.log(`🔍 State file provided: ${stateFile}`);
-    console.log(`🔍 Processing state file: ${stateFile}`)
+    if (is_e) { sh_e = '🔍 '; }
+    if (!is_q) console.log(`${sh_e}State file provided: ${stateFile}`);
+    if (!is_q) console.log(`${sh_e}Processing state file: ${stateFile}`)
 
     let jsonState: string;
     
     try {
       jsonState = readFileSync(stateFile, 'utf-8');
     } catch (err) {
-      console.error('❌ Error: Reading JSON state file:', err);
+      if (is_e) { sh_e = '❌ '; }
+      if (!is_q) console.error(sh_e + 'Error: Reading JSON state file:', err);
       process.exit(1);
     }
 
@@ -207,7 +224,8 @@ Example:
         const xmlFilePath = data.fileName;
         inputFiles.push(xmlFilePath);
         inputFile = '';
-        console.log(`📄 Added XML file from state: ${xmlFilePath}`);
+        if (is_e) { sh_e = '📄 '; }
+        if (!is_q) console.log(`${sh_e}Added XML file from state: ${xmlFilePath}`);
       }
     }
   } else {
@@ -218,8 +236,9 @@ Example:
   }
 
   if (inputFiles.length === 0) {
-    console.error('❌ Error: You must provide an input XML file or a state JSON file');
-    console.error('Use --help to see usage instructions');
+    if (is_e) { sh_e = '❌ '; }
+    if (!is_q) console.error(sh_e + 'Error: You must provide an input XML file or a state JSON file');
+    if (!is_q) console.error('Use --help to see usage instructions');
     process.exit(1);
   } else {
     for (inputFile of inputFiles) {
@@ -227,7 +246,8 @@ Example:
         outputFile = inputFile.substring(0, inputFile.length - 4) + '.pdf';
       }
 
-      console.log(`🚪 Output file provided: ${outputFile}`);
+      if (is_e) { sh_e = '🚪 '; }
+      if (!is_q) console.log(`${sh_e}Output file provided: ${outputFile}`);
 
       const detectedNrKSeF = extractNrKSeFFromFilename(inputFile);
       const nrKSeF = detectedNrKSeF || 'NONE';
@@ -235,15 +255,18 @@ Example:
       let dataInvoice = extractDateFromKSeF(nrKSeF);
 
       if (detectedNrKSeF) {
-        console.log(`🔍 Finding KSeF number from filename: ${nrKSeF}`);
+        if (is_e) { sh_e = '🔍 '; }
+        if (!is_q) console.log(`${sh_e}Finding KSeF number from filename: ${nrKSeF}`);
       } else {
-        console.log(`ℹ️  No KSeF number detected in filename, using: "NONE"`);
+        if (is_e) { sh_e = 'ℹ️  '; }
+        if (!is_q) console.log(`${sh_e}No KSeF number detected in filename, using: "NONE"`);
         nrNIP = '0101010101';
         dataInvoice = '01-02-2026';
       }
 
       try {
-        console.log(`📄 Parsing XML: ${inputFile}`);
+        if (is_e) { sh_e = '📄 '; }
+        if (!is_q) console.log(`${sh_e}Parsing XML: ${inputFile}`);
         const xml: unknown = parseXMLFromFile(inputFile);
       
         const xmlfile = readFileSync(inputFile, 'utf-8');
@@ -251,25 +274,29 @@ Example:
         const xmlhashb64 = Base64url.stringify(xmlhash);
         const qrCode = 'https://qr.ksef.mf.gov.pl/invoice/' + nrNIP + '/' + dataInvoice + '/' + xmlhashb64
         
-        console.log(`🔑 Hash SHA-256 file: ${xmlhash}`);
-        console.log(`🔑 Hash SHA-256 file to Base64: ${xmlhashb64}`);
-        console.log(`🔑 QR Code Link: ${qrCode}`);
+        if (is_e) { sh_e = '🔑 '; }
+        if (!is_q) console.log(`${sh_e}Hash SHA-256 file: ${xmlhash}`);
+        if (!is_q) console.log(`${sh_e}Hash SHA-256 file to Base64: ${xmlhashb64}`);
+        if (!is_q) console.log(`${sh_e}QR Code Link: ${qrCode}`);
       
         const ksefVersion: any = (xml as any)?.Faktura?.Naglowek?.KodFormularza?._attributes?.kodSystemowy;
 
         if (!ksefVersion) {
-          console.error('❌ Error: Cannot determine invoice version (FA1/FA2/FA3)');
+          if (is_e) { sh_e = '❌ '; }
+          if (!is_q) console.error(sh_e + 'Error: Cannot determine invoice version (FA1/FA2/FA3)');
           process.exit(1);
         }
 
-        console.log(`📋 Invoice version: ${ksefVersion}`);
+        if (is_e) { sh_e = '📋 '; }
+        if (!is_q) console.log(`${sh_e}Invoice version: ${ksefVersion}`);
 
         const additionalData: AdditionalDataTypes = {
           nrKSeF,
           qrCode,
         };
 
-        console.log(`🔧 Generating PDF...`);
+        if (is_e) { sh_e = '🔧 '; }
+        if (!is_q) console.log(`${sh_e}Generating PDF...`);
 
         const generateBuffer = (pdfDoc: any): Promise<Buffer> => {
           return new Promise((resolve, reject) => {
@@ -294,19 +321,22 @@ Example:
             pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData);
             break;
           default:
-            console.error(`❌ Unhandled invoice version: ${ksefVersion}`);
+            if (is_e) { sh_e = '❌ '; }
+            if (!is_q) console.error(`${sh_e}Unhandled invoice version: ${ksefVersion}`);
             process.exit(1);
         }
 
         try {
           const buffer = await generateBuffer(pdf);
           writeFileSync(outputFile, buffer);
-          console.log(`✅ PDF generated successfully: ${outputFile}`);
+          if (!is_q) console.log(`✅ PDF generated successfully: ${outputFile}`);
         } catch (error) {
-          console.error('❌ Error while saving PDF:', error);
+          if (is_e) { sh_e = '❌ '; }
+          if (!is_q) console.error(sh_e + 'Error while saving PDF:', error);
         }
       } catch (error) {
-        console.error('❌ Error:', error);
+        if (is_e) { sh_e = '❌ '; }
+        if (!is_q) console.error(sh_e + 'Error:', error);
         process.exit(1);
       }
     }
@@ -314,6 +344,7 @@ Example:
 }
 
 main().catch((error) => {
-  console.error('❌ Unexpected error:', error);
+  if (is_e) { sh_e = '❌ '; }
+  if (!is_q) console.error(sh_e+ 'Unexpected error:', error);
   process.exit(1);
 });
