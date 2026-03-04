@@ -104,15 +104,15 @@ function parseXMLFromFile(filePath: string): unknown {
 
 async function main() {
   const args = process.argv.slice(2);
-
-  if (!is_q) console.log(`
-KSeF PDF Generator - ver. 1.2.0
-Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
-------------------------------------------------------------------------------
-`);
-    
+   
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
-    if (!is_q) console.log(`Useage: ksef-pdf-generator.exe <ksef-xml-file> [options]
+    console.log(`
+  KSeF PDF Generator - ver. 1.2.0
+  Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
+  ------------------------------------------------------------------------------
+`);
+
+    console.log(`Useage: ksef-pdf-generator.exe <ksef-xml-file> [options]
 
 A tool for generating PDF documents from KSeF XML files.
 
@@ -169,6 +169,12 @@ Example:
       is_i  = true;
     }
   }
+
+  if (!is_q) console.log(`
+KSeF PDF Generator - ver. 1.2.0
+Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
+------------------------------------------------------------------------------
+`);
 
   if (is_s || is_i) {
     if (!stateFile && is_s) {
