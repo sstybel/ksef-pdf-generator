@@ -42,7 +42,7 @@ export async function generateInvoice(
         pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData);
         break;
       case 'FA (3)':
-        pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, dataUri, file.name, file.lastModified);
+        pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, dataUri, file.name, file.lastModified, file.lastModified, 'Krajowy System e-Faktur - XML');
         break;
     }
     switch (formatType) {

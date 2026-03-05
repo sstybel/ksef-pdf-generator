@@ -1,5 +1,4 @@
-#!/usr/bin/env node
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { xml2js } from 'xml-js';
 import { generateFA1 } from './lib-public/FA1-generator';
 import { generateFA2 } from './lib-public/FA2-generator';
@@ -10,7 +9,6 @@ import { Faktura as Faktura3 } from './lib-public/types/fa3.types';
 import { AdditionalDataTypes } from './lib-public/types/common.types';
 import Base64url from "crypto-js/enc-base64url"
 import SHA256 from "crypto-js/sha256";
-import { TCreatedPdf } from 'pdfmake/build/pdfmake';
 
 interface ksefSeller {
   nip: string;
@@ -147,7 +145,7 @@ Example:
   let is_o = false;
   let is_s = false;
   let inputFiles = [];
-  let pdf: TCreatedPdf;
+  let pdf;
   
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
