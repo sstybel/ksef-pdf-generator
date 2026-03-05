@@ -17,7 +17,7 @@ Since version [**1.2.0 releases**](https://github.com/sstybel/ksef-pdf-generator
 * Silent mode (default: disabled)
 * Show emoticons (default: disabled)
 
-Since version [**1.3.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.3.0), as suggested by [**@niutech**](https://github.com/niutech), to ensure long-term archiving, the **PDF** file is created in accordance with the **PDF/A-3** standard - **ISO 19005-3:2012**.  This standard ensures long-term archiving based on **PDF version 1.7**, which allows any data formats (e.g., **XML**, **CSV**, **CAD**, source **Word files**) to be embedded within the **PDF** file. **PDF** is a *“container”* that combines visual consistency with the original (for viewing) and raw data for automatic processing.
+Since version [**1.3.1 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.3.1), as suggested by [**@niutech**](https://github.com/niutech), to ensure long-term archiving, the **PDF** file is created in accordance with the **PDF/A-3** standard - **ISO 19005-3:2012**.  This standard ensures long-term archiving based on **PDF version 1.7**, which allows any data formats (e.g., **XML**, **CSV**, **CAD**, source **Word files**) to be embedded within the **PDF** file. **PDF** is a *“container”* that combines visual consistency with the original (for viewing) and raw data for automatic processing.
 
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
