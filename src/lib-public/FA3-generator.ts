@@ -23,7 +23,7 @@ import { AdditionalDataTypes } from './types/common.types';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
-export function generateFA3(invoice: Faktura, additionalData: AdditionalDataTypes, dataUri?: string, filename?: string, dateInv?: number, dateInvStor?: number, description?: string): TCreatedPdf {
+export function generateFA3(invoice: Faktura, additionalData: AdditionalDataTypes, dataUri?: string, filename?: string, dateInv?: Date, dateInvStor?: Date, description?: string, relationship?: string): TCreatedPdf {
   const isKOR_RABAT: boolean =
     invoice.Fa?.RodzajFaktury?._text == TRodzajFaktury.KOR && hasValue(invoice.Fa?.OkresFaKorygowanej);
   const rabatOrRowsInvoice: Content = isKOR_RABAT ? generateRabat(invoice.Fa!) : generateWiersze(invoice.Fa!);
@@ -53,7 +53,7 @@ export function generateFA3(invoice: Faktura, additionalData: AdditionalDataType
       ...generateStopka(additionalData, invoice.Stopka, invoice.Naglowek, invoice.Fa?.WZ, invoice.Zalacznik),
     ],
     ...generateStyle(),
-    ...(dataUri && { files: { xml: { src: dataUri, name: filename, hidden: false, relationship: 'Alternative', description: description, creationDate: dateInv, modifiedDate: dateInvStor, type: 'application/xml' } as Attachment } })
+    ...(dataUri && { files: { xml: { src: dataUri, name: filename, hidden: false, relationship: relationship, description: description, creationDate: dateInv, modifiedDate: dateInvStor, type: 'application/xml' } as Attachment } })
   };
 
   return pdfMake.createPdf(docDefinition);

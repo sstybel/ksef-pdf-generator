@@ -103,7 +103,7 @@ async function main() {
    
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
-KSeF PDF Generator - ver. 1.3.0
+KSeF PDF Generator - ver. 1.3.1
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -167,7 +167,7 @@ Example:
   }
 
   if (!is_q) console.log(`
-KSeF PDF Generator - ver. 1.3.0
+KSeF PDF Generator - ver. 1.3.1
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -235,7 +235,8 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
     }
   } else {
     if (inputFiles.length === 0 && inputFile != '') {
-      inputFiles.push(inputFile);
+      const dictCMLKSeF = {file: inputFile, dateInv: new Date(), dateInvStor: new Date()};
+      inputFiles.push(dictCMLKSeF);
       inputFile = ''
     }
   }
@@ -249,8 +250,8 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
     let inputData: any;
     for (inputData of inputFiles) {
       let inputFile = inputData.file;
-      let inputDateInv = Date.parse(inputData.dateInv);
-      let inputDateInvStor =  Date.parse(inputData.dateInvStor);
+      let inputDateInv = new Date(Date.parse(inputData.dateInv));
+      let inputDateInvStor =  new Date(Date.parse(inputData.dateInvStor));
 
       if (!is_o) {
         outputFile = inputFile.substring(0, inputFile.length - 4) + '.pdf';
@@ -319,7 +320,7 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
             pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData);
             break;
           case 'FA (3)':
-            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML');
+            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
             break;
           default:
             if (is_e) { sh_e = '❌ '; }
