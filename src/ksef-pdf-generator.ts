@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { xml2js } from 'xml-js';
 import { generateFA1 } from './lib-public/FA1-generator';
 import { generateFA2 } from './lib-public/FA2-generator';
@@ -103,7 +103,7 @@ async function main() {
    
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
-KSeF PDF Generator - ver. 1.3.1
+KSeF PDF Generator - ver. 1.3.5
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -117,6 +117,7 @@ Options:
   [-o], [--output] [<ksef-pdf-file>]          Path to output PDF file (default: like name XML file with changed extension to .pdf)
   [-e], [--emo]                               Show emoticons in on-screen messages
   [-q], [--quiet]                             Quiet mode, does not display messages on the screen
+  [-w], [--overwrite]                         Overwrite the PDF invoice file if it exists (default: do not overwrite the PDF invoice file if it exists)
   -h, --help                                  Show this help message
 
 Attention:
@@ -144,6 +145,7 @@ Example:
   let is_i = false;
   let is_o = false;
   let is_s = false;
+  let is_w = false;
   let inputFiles = [];
   let pdf;
   
@@ -160,6 +162,8 @@ Example:
       is_e = true;
     } else if (arg === '-q' || arg === '--quiet') {
       is_q = true;
+    }  else if (arg === '-w' || arg === '--overwrite') {
+      is_w = true;
     } else if (!arg.startsWith('-')) {
       inputFile = arg;
       is_i  = true;
@@ -167,7 +171,7 @@ Example:
   }
 
   if (!is_q) console.log(`
-KSeF PDF Generator - ver. 1.3.1
+KSeF PDF Generator - ver. 1.3.5
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -252,13 +256,24 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
       let inputFile = inputData.file;
       let inputDateInv = new Date(Date.parse(inputData.dateInv));
       let inputDateInvStor =  new Date(Date.parse(inputData.dateInvStor));
-
+      
       if (!is_o) {
         outputFile = inputFile.substring(0, inputFile.length - 4) + '.pdf';
       }
 
       if (is_e) { sh_e = '🚪 '; }
       if (!is_q) console.log(`${sh_e}Output file provided: ${outputFile}`);
+
+      if (existsSync(outputFile)) {
+        if (is_w) {
+          if (is_e) { sh_e = '📝 '; }
+          if (!is_q) console.log(`${sh_e}The file exists, overwriting the file: ${outputFile}`);          
+        } else {
+          if (is_e) { sh_e = '↪️ '; }
+          if (!is_q) console.log(`${sh_e}The file exists, overwriting was skipped: ${outputFile}`);
+          continue;
+        }
+      }
 
       const detectedNrKSeF = extractNrKSeFFromFilename(inputFile);
       const nrKSeF = detectedNrKSeF || 'NONE';

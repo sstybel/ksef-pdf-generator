@@ -19,6 +19,8 @@ Since version [**1.2.0 releases**](https://github.com/sstybel/ksef-pdf-generator
 
 Since version [**1.3.1 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.3.1), as suggested by [**@niutech**](https://github.com/niutech), to ensure long-term archiving, the **PDF** file is created in accordance with the **PDF/A-3** standard - **ISO 19005-3:2012**.  This standard ensures long-term archiving based on **PDF version 1.7**, which allows any data formats (e.g., **XML**, **CSV**, **CAD**, source **Word files**) to be embedded within the **PDF** file. **PDF** is a *“container”* that combines visual consistency with the original (for viewing) and raw data for automatic processing.
 
+In version [**1.3.5 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.3.5), the default behavior when a **KSeF PDF** invoice file exists has been changed so that the **KSeF** invoice **PDF** file is not overwritten. In addition, a parameter has been added that can change this behavior, resulting in **KSeF** invoice **PDF** files being overwritten.
+
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
 &nbsp;
@@ -36,6 +38,7 @@ Since version [**1.3.1 releases**](https://github.com/sstybel/ksef-pdf-generator
 * [`-o`], [`--output`] [`<ksef-pdf-file>`] - Path to the output **PDF** file (default: **XML** file name changed to **.pdf**)
 * [`-e`], [`--emo`] - Show emoticons in on-screen messages
 * [`-q`], [`--quiet`] - Quiet mode, does not display messages on the screen
+* [`-w`], [`--overwrite`] - Overwrite the PDF invoice file if it exists (default: do not overwrite the PDF invoice file if it exists)
 * [`-h`], [`--help`] - Display this help message
 
 **Notes:**
