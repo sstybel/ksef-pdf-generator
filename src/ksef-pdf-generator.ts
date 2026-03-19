@@ -103,7 +103,7 @@ async function main() {
    
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
-KSeF PDF Generator - ver. 1.3.5
+KSeF PDF Generator - ver. 1.4.0
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -293,15 +293,28 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
       try {
         if (is_e) { sh_e = '📄 '; }
         if (!is_q) console.log(`${sh_e}Parsing XML: ${inputFile}`);
+
         const xml: unknown = parseXMLFromFile(inputFile);
         const namefilexml = inputFile.split("\\").pop();
         const xmlfile = readFileSync(inputFile, 'utf-8');
         const xmlhash = SHA256(xmlfile);
         const xmlhashb64 = Base64url.stringify(xmlhash);
-        const qrCode = 'https://qr.ksef.mf.gov.pl/invoice/' + nrNIP + '/' + dataInvoice + '/' + xmlhashb64
-        
-        let DataBase64XML = Buffer.from(xmlfile, 'binary').toString('base64');
+
+        let dataInvoiceFromXML = (xml as any)?.Faktura?.Fa?.P_1._text;
+        let dataInvoiceFromXML_dd = dataInvoiceFromXML.substring(8, 10);
+        let dataInvoiceFromXML_mm = dataInvoiceFromXML.substring(5, 7);
+        let dataInvoiceFromXML_yy = dataInvoiceFromXML.substring(0, 4);
+        dataInvoiceFromXML = dataInvoiceFromXML_dd + '-' + dataInvoiceFromXML_mm + '-' + dataInvoiceFromXML_yy;
+
+        if (dataInvoice != dataInvoiceFromXML) {
+          dataInvoice = dataInvoiceFromXML;
+        }
+
+        let DataXML = Buffer.from(xmlfile, 'binary');
+        let DataBase64XML = DataXML.toString('base64');
         let DataUri = `data:application/xml;base64,${DataBase64XML}`;
+
+        const qrCode = 'https://qr.ksef.mf.gov.pl/invoice/' + nrNIP + '/' + dataInvoice + '/' + xmlhashb64
 
         if (is_e) { sh_e = '🔑 '; }
         if (!is_q) console.log(`${sh_e}Hash SHA-256 file: ${xmlhash}`);

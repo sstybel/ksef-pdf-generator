@@ -21,6 +21,8 @@ Since version [**1.3.1 releases**](https://github.com/sstybel/ksef-pdf-generator
 
 In version [**1.3.5 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.3.5), the default behavior when a **KSeF PDF** invoice file exists has been changed so that the **KSeF** invoice **PDF** file is not overwritten. In addition, a parameter has been added that can change this behavior, resulting in **KSeF** invoice **PDF** files being overwritten.
 
+In version [**1.4.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.4.0), fixes have been made to the generation of invoice verification links in the **KSeF** system.
+
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
 &nbsp;
