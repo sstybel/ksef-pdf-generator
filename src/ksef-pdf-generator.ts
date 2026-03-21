@@ -256,7 +256,13 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
       let inputFile = inputData.file;
       let inputDateInv = new Date(Date.parse(inputData.dateInv));
       let inputDateInvStor =  new Date(Date.parse(inputData.dateInvStor));
-      
+
+      if (!existsSync(inputFile)) {
+        if (is_e) { sh_e = '⚠️  '; }
+        if (!is_q) console.log(`${sh_e}File does not exist, skipping XML KSeF file: ${inputFile}`);
+        continue;
+      }
+
       if (!is_o) {
         outputFile = inputFile.substring(0, inputFile.length - 4) + '.pdf';
       }
