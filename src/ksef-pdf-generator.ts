@@ -9,6 +9,7 @@ import { Faktura as Faktura3 } from './lib-public/types/fa3.types';
 import { AdditionalDataTypes } from './lib-public/types/common.types';
 import Base64url from "crypto-js/enc-base64url"
 import SHA256 from "crypto-js/sha256";
+import os from 'node:os';
 
 interface ksefSeller {
   nip: string;
@@ -58,6 +59,14 @@ let is_e = false;
 let sh_e = "";
 let is_q = false;
 
+function path_linux(path: string, is_linux: boolean = false): string {
+  let result = path;
+  if (is_linux) {
+    result = result.replace("\\", "/")
+  }
+  return result;
+}
+
 function extractNrKSeFFromFilename(filename: string): string | null {
   const ksefPattern = /(\d{10}-\d{8}-[A-Z0-9]{12,16}-[A-Z0-9]{2})/i;
   const match = filename.match(ksefPattern);
@@ -92,8 +101,8 @@ function stripPrefixes<T>(obj: T): T {
   return obj;
 }
 
-function parseXMLFromFile(filePath: string): unknown {
-  const xmlStr = readFileSync(filePath, 'utf-8');
+function parseXMLFromFile(filePath: string, is_linux: boolean): unknown {
+  const xmlStr = readFileSync(path_linux(filePath, is_linux), 'utf-8');
   const jsonDoc = stripPrefixes(xml2js(xmlStr, { compact: true }));
   return jsonDoc;
 }
@@ -146,17 +155,23 @@ Example:
   let is_o = false;
   let is_s = false;
   let is_w = false;
+  let is_linux = false;
   let inputFiles = [];
   let pdf;
   
+  let os_str: string = os.platform()
+  if (os_str.toLowerCase() == "linux") {
+    is_linux = true;
+  }
+
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     
     if (arg === '-o' || arg === '--output') {
-      outputFile = args[++i];
+      outputFile = path_linux(args[++i], is_linux);
 	    is_o = true;
     } else if (arg === '-s' || arg === '--state') {
-      stateFile = args[++i];
+      stateFile = path_linux(args[++i], is_linux);
       is_s = true;
     } else if (arg === '-e' || arg === '--emo') {
       is_e = true;
@@ -165,7 +180,7 @@ Example:
     }  else if (arg === '-w' || arg === '--overwrite') {
       is_w = true;
     } else if (!arg.startsWith('-')) {
-      inputFile = arg;
+      inputFile = path_linux(arg, is_linux);
       is_i  = true;
     }
   }
@@ -253,7 +268,7 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
   } else {
     let inputData: any;
     for (inputData of inputFiles) {
-      let inputFile = inputData.file;
+      let inputFile = path_linux(inputData.file, is_linux);
       let inputDateInv = new Date(Date.parse(inputData.dateInv));
       let inputDateInvStor =  new Date(Date.parse(inputData.dateInvStor));
 
@@ -264,7 +279,7 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
       }
 
       if (!is_o) {
-        outputFile = inputFile.substring(0, inputFile.length - 4) + '.pdf';
+        outputFile = path_linux(inputFile.substring(0, inputFile.length - 4) + '.pdf', is_linux);
       }
 
       if (is_e) { sh_e = '🚪 '; }
@@ -300,8 +315,11 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
         if (is_e) { sh_e = '📄 '; }
         if (!is_q) console.log(`${sh_e}Parsing XML: ${inputFile}`);
 
-        const xml: unknown = parseXMLFromFile(inputFile);
-        const namefilexml = inputFile.split("\\").pop();
+        const xml: unknown = parseXMLFromFile(inputFile, is_linux);
+        let namefilexml = inputFile.split("\\").pop();
+        if (is_linux) {
+          namefilexml = inputFile.split("/").pop();
+        }
         const xmlfile = readFileSync(inputFile, 'utf-8');
         const xmlhash = SHA256(xmlfile);
         const xmlhashb64 = Base64url.stringify(xmlhash);
