@@ -98,3 +98,5 @@ describe('generateRozliczenie', (): void => {
     expect(hasBalance).toBe(true);
   });
 });
+
+

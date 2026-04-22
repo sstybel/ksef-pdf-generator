@@ -44,3 +44,5 @@ describe(generateAdres.name, () => {
     expect((result[0] as any).text).toContain('GLN:');
   });
 });
+
+

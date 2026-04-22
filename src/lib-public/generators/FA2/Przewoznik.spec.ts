@@ -166,3 +166,5 @@ describe(generatePrzewoznik.name, () => {
     });
   });
 });
+
+

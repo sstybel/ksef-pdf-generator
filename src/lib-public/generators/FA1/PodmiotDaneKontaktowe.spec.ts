@@ -47,3 +47,5 @@ describe('generateDaneKontaktowe', () => {
     expect(result.length).toBe(2);
   });
 });
+
+

@@ -121,3 +121,5 @@ describe(generateDokumentUPO.name, () => {
     expect(PDFFunctions.getTable).toHaveBeenCalledWith(mockPotwierdzenie.Dokument);
   });
 });
+
+

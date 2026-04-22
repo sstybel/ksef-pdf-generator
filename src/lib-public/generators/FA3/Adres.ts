@@ -18,3 +18,5 @@ export function generateAdres(adres: Adres): Content[] {
   result.push(...createLabelText('GLN: ', adres.GLN));
   return result;
 }
+
+

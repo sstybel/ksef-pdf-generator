@@ -1,5 +1,5 @@
 import { Content, ContentTable, ContentText, TableCell } from 'pdfmake/interfaces';
-import { DEFAULT_TABLE_LAYOUT, TableDataType } from '../../../shared/consts/const';
+import { DEFAULT_TABLE_LAYOUT, TableDataType } from '../../../shared/consts/FA.const';
 import {
   createHeader,
   createLabelText,
@@ -9,6 +9,7 @@ import {
   getContentTable,
   getTable,
   hasValue,
+  makeBreakable,
 } from '../../../shared/PDF-functions';
 import { HeaderDefine } from '../../../shared/types/pdf-types';
 import { BlokDanych, FP, Kol, MetaDane, Tabela, TMetaDane, Wiersz, Zalacznik } from '../../types/fa3.types';
@@ -135,9 +136,9 @@ function createTable(
   totalLength: number
 ): ContentTable {
   const definedHeader: Content[] = cols.map((item: Kol): string | ContentText =>
-    formatText(item.NKom?._text, FormatTyp.GrayBoldTitle)
+    formatText(makeBreakable(item.NKom?._text), FormatTyp.GrayBoldTitle)
   );
-  const tableBody: Content[] = [];
+  const tableBody: TableCell[] = [];
 
   getTable(rows).forEach((item: Wiersz): void => {
     const WKom: FP[] = getTable(item.WKom);
@@ -145,36 +146,40 @@ function createTable(
     while (WKom.length < totalLength) {
       WKom.push({ _text: '' });
     }
-    const cuttedRows: FP[][] = chunkArray(WKom ?? []);
 
+    const cuttedRows: FP[][] = chunkArray(WKom ?? []);
     if (cuttedRows.length >= subTableIndex + 1) {
       tableBody.push(
-        cuttedRows[subTableIndex].map((subItem: FP, index: number): Content => {
-          return formatText(
-            subItem._text ?? '',
-            cols[index]._attributes?.Typ ? TableDataType[cols[index]._attributes.Typ] : FormatTyp.Value
-          ) as Content;
+        ...cuttedRows[subTableIndex].map((subItem: FP, index: number): TableCell => {
+          let formatType = FormatTyp.Value;
+          const typeKey = cols[index]._attributes?.Typ;
+          const formatTypeAttribute = typeKey ? TableDataType[typeKey] : undefined;
+
+          if (formatTypeAttribute && ![FormatTyp.Date, FormatTyp.DateTime].includes(formatTypeAttribute)) {
+            formatType = formatTypeAttribute;
+          }
+
+          return formatText(subItem._text ? makeBreakable(subItem._text) : '', formatType) as TableCell;
         })
       );
     }
   });
-  const widths: Content[] = definedHeader.map((index: Content): string[] => {
-    if (index) {
-      return ['*'];
-    } else {
-      return ['auto'];
+
+  const widths: string[] = definedHeader.map((_, i): string => {
+    if (i === 0) {
+      return '*';
     }
+    return 'auto';
   });
 
   return {
     table: {
       headerRows: 1,
       widths: [...widths] as never[],
-      heights: 8,
       body: [[...definedHeader], ...tableBody] as TableCell[][],
     },
     layout: DEFAULT_TABLE_LAYOUT,
-    marginTop: 8,
+    margin: [0, 8, 0, 0],
   };
 }
 
@@ -236,3 +241,5 @@ export function chunkArray<T>(columns: T[]): T[][] {
     return result;
   }
 }
+
+

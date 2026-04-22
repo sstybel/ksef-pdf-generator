@@ -109,3 +109,5 @@ describe(generatePodmiot2Podmiot2K.name, () => {
     expect(result[result.length - 1]).toHaveProperty('margin');
   });
 });
+
+

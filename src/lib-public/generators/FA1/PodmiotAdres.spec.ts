@@ -46,3 +46,5 @@ describe('generatePodmiotAdres', () => {
     expect(resultSub[1]).toEqual({ text: 'ADRES:Warszawa' });
   });
 });
+
+

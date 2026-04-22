@@ -70,3 +70,5 @@ describe(generatePodmiotUpowaznionyDaneKontaktowe.name, () => {
     expect(result.flat().some((c) => (c as any)?.text?.includes('Tel.: 111111111'))).toBeTruthy();
   });
 });
+
+

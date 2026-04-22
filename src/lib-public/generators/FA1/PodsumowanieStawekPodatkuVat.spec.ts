@@ -94,3 +94,5 @@ describe('getSummaryTaxRate', () => {
     expect(getSummaryTaxRate(fa)).toHaveLength(0);
   });
 });
+
+

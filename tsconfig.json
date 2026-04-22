@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2022",
     "module": "commonjs",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "strict": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
@@ -12,7 +12,8 @@
     "baseUrl": "./src",
     "paths": {
       "@lib-public/*": ["lib-public/*"],
-      "@lib-private/*": ["lib-private/*"]
+      "@lib-private/*": ["lib-private/*"],
+      "@shared/*": ["shared/*"]
     }
   },
   "include": ["src"]

@@ -162,3 +162,5 @@ describe(generatePodsumowanieStawekPodatkuVat.name, () => {
     expect(summary[1].taxRateString).toBe('marża');
   });
 });
+
+

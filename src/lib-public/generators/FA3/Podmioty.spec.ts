@@ -122,3 +122,5 @@ describe(generatePodmioty.name, () => {
     expect(result.content[1].text).toEqual('PodmiotUpowazniony content');
   });
 });
+
+

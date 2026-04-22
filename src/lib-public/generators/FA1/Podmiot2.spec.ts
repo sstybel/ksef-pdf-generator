@@ -66,3 +66,5 @@ describe('generatePodmiot2', () => {
     expect(result).toEqual(expect.arrayContaining([{ text: 'LABEL:Numer klienta: NR1234' }]));
   });
 });
+
+

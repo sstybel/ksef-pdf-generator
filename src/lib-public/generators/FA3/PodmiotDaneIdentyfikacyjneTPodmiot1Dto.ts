@@ -8,3 +8,5 @@ export function generateDaneIdentyfikacyjneTPodmiot1Dto(daneIdentyfikacyjne: Dan
     createLabelText('Nazwa: ', daneIdentyfikacyjne.Nazwa),
   ];
 }
+
+

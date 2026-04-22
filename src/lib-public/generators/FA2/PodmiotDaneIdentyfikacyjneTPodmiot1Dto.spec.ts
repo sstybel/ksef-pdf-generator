@@ -32,3 +32,5 @@ describe(generateDaneIdentyfikacyjneTPodmiot1Dto.name, () => {
     expect(result).toEqual([{ text: 'NIP: ' }, { text: 'Nazwa: ' }]);
   });
 });
+
+

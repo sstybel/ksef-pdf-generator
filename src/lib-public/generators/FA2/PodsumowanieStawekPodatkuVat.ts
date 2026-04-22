@@ -1,4 +1,4 @@
-import { Content, ContentTable } from 'pdfmake/interfaces';
+import { Content, ContentTable, TableCell } from 'pdfmake/interfaces';
 import {
   createHeader,
   createSection,
@@ -10,7 +10,7 @@ import {
 import FormatTyp from '../../../shared/enums/common.enum';
 import { Fa, Faktura, FP } from '../../types/fa2.types';
 import { TaxSummaryTypes } from '../../types/tax-summary.types';
-import { DEFAULT_TABLE_LAYOUT } from '../../../shared/consts/const';
+import { DEFAULT_TABLE_LAYOUT } from '../../../shared/consts/FA.const';
 
 export function generatePodsumowanieStawekPodatkuVat(faktura: Faktura): Content[] {
   const AnyP13P14_5Diff0: boolean =
@@ -47,12 +47,12 @@ export function generatePodsumowanieStawekPodatkuVat(faktura: Faktura): Content[
     hasValue(faktura.Fa?.P_14_3W) ||
     hasValue(faktura.Fa?.P_14_4W);
 
-  let tableBody: Content[][] = [];
+  let tableBody: TableCell[] = [];
   const table: ContentTable = {
     table: {
       headerRows: 1,
       widths: [],
-      body: [] as Content[][],
+      body: [] as TableCell[][],
     },
     layout: DEFAULT_TABLE_LAYOUT,
   };
@@ -108,23 +108,23 @@ export function generatePodsumowanieStawekPodatkuVat(faktura: Faktura): Content[
         data.push('OSS');
       }
       if (AnyP13) {
-        data.push(formatText(item.net, FormatTyp.Currency));
+        data.push(formatText(item.net, FormatTyp.Currency) ?? '');
       }
       if (AnyP13P14_5Diff0) {
-        data.push(formatText(item.tax, FormatTyp.Currency));
+        data.push(formatText(item.tax, FormatTyp.Currency) ?? '');
       } else if (hasValue(faktura.Fa?.P_14_5)) {
         data.push(getValue(faktura.Fa?.P_14_5) ?? '');
       }
       if (AnyP13) {
-        data.push(formatText(item.gross, FormatTyp.Currency));
+        data.push(formatText(item.gross, FormatTyp.Currency) ?? '');
       }
       if (AnyP_14xW) {
-        data.push(formatText(item.taxPLN, FormatTyp.Currency));
+        data.push(formatText(item.taxPLN, FormatTyp.Currency) ?? '');
       }
       return data;
     });
   }
-  table.table.body = [[...definedHeader], ...tableBody] as Content[][];
+  table.table.body = [[...definedHeader], ...tableBody] as TableCell[][];
   table.table.widths = [...widths] as never[];
 
   return tableBody.length
@@ -316,3 +316,5 @@ export function getSummaryTaxRate(fa: Fa): TaxSummaryTypes[] {
 function hasValueAndDiff0(value: FP | string | number | undefined): boolean {
   return hasValue(value) && getValue(value) != 0;
 }
+
+

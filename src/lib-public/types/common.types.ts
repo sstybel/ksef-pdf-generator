@@ -25,5 +25,7 @@ export type FA2FakturaZaliczkowaData = FA2FakturaZaliczkowaDataSpozaKSeF | FA2Fa
 export interface AdditionalDataTypes {
   nrKSeF: string;
   qrCode?: string;
+  qr2Code?: string;
   isMobile?: boolean;
+  watermark?: string;
 }

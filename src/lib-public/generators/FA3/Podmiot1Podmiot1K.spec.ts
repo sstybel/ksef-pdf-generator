@@ -90,3 +90,5 @@ describe(generatePodmiot1Podmiot1K.name, () => {
     expect(result[3]).toEqual({ margin: 1 });
   });
 });
+
+

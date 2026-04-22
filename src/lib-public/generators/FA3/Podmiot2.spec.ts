@@ -119,3 +119,5 @@ describe(generatePodmiot2.name, () => {
     expect(createLabelText).toHaveBeenCalledWith('Numer klienta: ', 'CL123');
   });
 });
+
+

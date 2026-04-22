@@ -88,3 +88,5 @@ describe(generateDodatkoweInformacje.name, () => {
     expect(result.length).toBeGreaterThan(0);
   });
 });
+
+

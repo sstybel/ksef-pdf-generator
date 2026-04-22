@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as PDFFunctions from '../../../shared/PDF-functions';
-import { TypKorekty } from '../../../shared/consts/const';
+import { TypKorekty } from '../../../shared/consts/FA.const';
 import { generateDaneFaKorygowanej } from './DaneFaKorygowanej';
 
 describe('generateDaneFaKorygowanej', () => {
@@ -83,3 +83,5 @@ describe('generateDaneFaKorygowanej', () => {
     expect(PDFFunctions.createSection).toHaveBeenCalled();
   });
 });
+
+

@@ -92,3 +92,5 @@ describe('generatePodmiot1', () => {
     expect(result).toEqual(expect.arrayContaining([{ text: 'LABEL:Status podatnika: Stan likwidacji' }]));
   });
 });
+
+

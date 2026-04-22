@@ -94,3 +94,5 @@ describe(generatePodmiot1.name, () => {
     expect(result.some((c) => (c as any).text === 'mockDaneKontaktowe')).toBe(false);
   });
 });
+
+

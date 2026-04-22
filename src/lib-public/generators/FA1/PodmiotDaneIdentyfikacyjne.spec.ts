@@ -60,3 +60,5 @@ describe('generateDaneIdentyfikacyjne', () => {
     expect(result).toEqual([{ text: 'LABEL:NIP: 11' }, { text: 'LABEL:Pełna nazwa: Best Corp' }]);
   });
 });
+
+

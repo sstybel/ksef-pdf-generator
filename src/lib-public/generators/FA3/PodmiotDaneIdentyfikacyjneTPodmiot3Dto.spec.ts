@@ -102,3 +102,5 @@ describe(generateDaneIdentyfikacyjneTPodmiot3Dto.name, () => {
     expect(result.some((r) => (r as any).text.includes('Nazwa: Only Name'))).toBe(true);
   });
 });
+
+

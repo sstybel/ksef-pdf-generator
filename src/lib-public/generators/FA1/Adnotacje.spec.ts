@@ -121,3 +121,5 @@ describe('generateAdnotacje - additional coverage', () => {
     expect(resultString).toContain('SPACING:1');
   });
 });
+
+

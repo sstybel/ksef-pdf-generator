@@ -185,3 +185,5 @@ describe(generateDostawy.name, () => {
     expect(result[0].table.body[0][0].text).toBe('Data dopuszczenia do użytku');
   });
 });
+
+

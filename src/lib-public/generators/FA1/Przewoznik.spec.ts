@@ -32,3 +32,5 @@ describe('generatePrzewoznik', () => {
     expect(result[0]).toEqual({ text: 'HEADER:Przewoźnik' });
   });
 });
+
+

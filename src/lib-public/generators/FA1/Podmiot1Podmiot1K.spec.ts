@@ -65,3 +65,5 @@ describe('generatePodmiot1Podmiot1K', () => {
     expect(result[result.length - 1]).toEqual({ text: 'SPACING:1' });
   });
 });
+
+

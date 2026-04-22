@@ -11,7 +11,7 @@ import {
 } from '../../../shared/PDF-functions';
 import { Adnotacje, NoweSrodkiTransportu, Zwolnienie } from '../../types/fa2.types';
 import FormatTyp from '../../../shared/enums/common.enum';
-import { DEFAULT_TABLE_LAYOUT } from '../../../shared/consts/const';
+import { DEFAULT_TABLE_LAYOUT } from '../../../shared/consts/FA.const';
 import { FP } from '../../types/fa1.types';
 
 export function generateAdnotacje(adnotacje?: Adnotacje): Content[] {
@@ -219,3 +219,5 @@ export function generateDostawy(noweSrodkiTransportu: NoweSrodkiTransportu): Con
 
   return tableBody.length ? [table, verticalSpacing(1)] : [];
 }
+
+

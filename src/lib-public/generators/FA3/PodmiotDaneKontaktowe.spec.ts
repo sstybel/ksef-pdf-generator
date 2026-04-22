@@ -41,3 +41,5 @@ describe(generateDaneKontaktowe.name, () => {
     expect(result).toEqual([]);
   });
 });
+
+

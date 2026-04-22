@@ -3,9 +3,11 @@ import { xml2js } from 'xml-js';
 import { generateFA1 } from './lib-public/FA1-generator';
 import { generateFA2 } from './lib-public/FA2-generator';
 import { generateFA3 } from './lib-public/FA3-generator';
+import { generateFARR } from './lib-public/FARR-generator';
 import { Faktura as Faktura1 } from './lib-public/types/fa1.types';
 import { Faktura as Faktura2 } from './lib-public/types/fa2.types';
 import { Faktura as Faktura3 } from './lib-public/types/fa3.types';
+import { FaRR } from './lib-public/types/FaRR.types';
 import { AdditionalDataTypes } from './lib-public/types/common.types';
 import Base64url from "crypto-js/enc-base64url"
 import SHA256 from "crypto-js/sha256";
@@ -112,7 +114,7 @@ async function main() {
    
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
-KSeF PDF Generator - ver. 1.4.0
+KSeF PDF Generator - ver. 1.4.5
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -186,7 +188,7 @@ Example:
   }
 
   if (!is_q) console.log(`
-KSeF PDF Generator - ver. 1.4.0
+KSeF PDF Generator - ver. 1.4.5
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -366,14 +368,17 @@ Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 
         switch (ksefVersion) {
           case 'FA (1)':
-            pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData);
+            pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
             break;
           case 'FA (2)':
-            pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData);
+            pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
             break;
           case 'FA (3)':
             pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
             break;
+          case 'FA_RR (1)':
+          case 'FA_RR(1)':
+            pdf = generateFARR((xml as any).Faktura as FaRR, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
           default:
             if (is_e) { sh_e = '❌ '; }
             if (!is_q) console.error(`${sh_e}Unhandled invoice version: ${ksefVersion}`);

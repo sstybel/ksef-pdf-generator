@@ -45,3 +45,5 @@ describe('generateDodatkoweInformacje', () => {
     expect(result.length).toBeGreaterThan(0);
   });
 });
+
+
