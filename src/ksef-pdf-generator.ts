@@ -103,9 +103,19 @@ function stripPrefixes<T>(obj: T): T {
   return obj;
 }
 
+function convert_amp_to_htmlamp(str: string): string {
+  return str.replace(/>(.*?)&/g, (match, p1) => `>${p1}&amp;`);
+}
+
+function remove_CDATA_tags(str: string): string {
+  return str.replace(/<!\[CDATA\[(.*?)\]\]>/g, (match, p1) => p1);
+}
+
 function parseXMLFromFile(filePath: string, is_linux: boolean): unknown {
   const xmlStr = readFileSync(path_linux(filePath, is_linux), 'utf-8');
-  const jsonDoc = stripPrefixes(xml2js(xmlStr, { compact: true }));
+  const xmlStrAmp = convert_amp_to_htmlamp(xmlStr);
+  const xmlStrCDATA = remove_CDATA_tags(xmlStrAmp);
+  const jsonDoc = stripPrefixes(xml2js(xmlStrCDATA, { compact: true }));
   return jsonDoc;
 }
 
