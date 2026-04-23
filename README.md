@@ -23,7 +23,7 @@ In version [**1.3.5 releases**](https://github.com/sstybel/ksef-pdf-generator/re
 
 In version [**1.4.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.4.0), fixes have been made to the generation of invoice verification links in the **KSeF** system.
 
-In this version [**1.4.5 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.4.5), we have added support for **RR invoices** (**FA-RR**) and made improvements to streamline the invoice generation process.
+In this version [**1.4.5 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.4.5), we have added support for **RR invoices** (**FA-RR**) and made improvements to streamline the invoice generation process. Support for converting the **` & `** character to the HTML tag **`&amp`** has also been added, and the **`<![CDATA[ ... ]]>`** tag has been removed from the **KSeF invoice** file in **XML** format.
 
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
