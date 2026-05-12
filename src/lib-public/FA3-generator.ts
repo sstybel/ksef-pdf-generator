@@ -21,6 +21,7 @@ import { Faktura } from './types/fa3.types';
 import { ZamowienieKorekta } from './enums/invoice.enums';
 import { AdditionalDataTypes } from './types/common.types';
 import { Position } from '../shared/enums/common.enum';
+import { generateWatermark } from '../shared/consts/watermark';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
@@ -29,7 +30,7 @@ export function generateFA3(invoice: Faktura, additionalData: AdditionalDataType
     invoice.Fa?.RodzajFaktury?._text == TRodzajFaktury.KOR && hasValue(invoice.Fa?.OkresFaKorygowanej);
   const rabatOrRowsInvoice: Content = isKOR_RABAT ? generateRabat(invoice.Fa!) : generateWiersze(invoice.Fa!);
   const docDefinition: TDocumentDefinitions = {
-    watermark: additionalData?.watermark,
+    ...generateWatermark(additionalData?.watermark),
     version: '1.7',
     subset: 'PDF/A-3',
     content: [
@@ -54,7 +55,6 @@ export function generateFA3(invoice: Faktura, additionalData: AdditionalDataType
       generateWarunkiTransakcji(invoice.Fa?.WarunkiTransakcji),
       ...generateStopka(additionalData, invoice.Stopka, invoice.Naglowek, invoice.Fa?.WZ, invoice.Zalacznik),
     ],
-    ...generateStyle(),
     ...(dataUri && { files: { xml: { src: dataUri, name: filename, hidden: false, relationship: relationship, description: description, creationDate: dateInv, modifiedDate: dateInvStor, type: 'application/xml' } as Attachment } }),
     footer: (currentPage, pageCount) => {
       return {

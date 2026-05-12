@@ -14,12 +14,13 @@ import { generateSzczegoly } from './generators/FA_RR/Szczegoly';
 import { generateWiersze } from './generators/FA_RR/Wiersze';
 import { AdditionalDataTypes } from './types/common.types';
 import { FaRR } from './types/FaRR.types';
+import { generateWatermark } from '../shared/consts/watermark';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
 export function generateFARR(invoice: FaRR, additionalData: AdditionalDataTypes, dataUri?: string, filename?: string, dateInv?: Date, dateInvStor?: Date, description?: string, relationship?: string): TCreatedPdf {
   const docDefinition: TDocumentDefinitions = {
-    watermark: additionalData?.watermark,
+    ...generateWatermark(additionalData?.watermark),
     version: '1.7',
     subset: 'PDF/A-3',
     content: [
@@ -33,7 +34,6 @@ export function generateFARR(invoice: FaRR, additionalData: AdditionalDataTypes,
       generatePlatnosc(invoice.FakturaRR?.Platnosc),
       ...generateStopka(additionalData, invoice.Stopka, invoice.Naglowek),
     ],
-    ...generateStyle(),
     ...(dataUri && { files: { xml: { src: dataUri, name: filename, hidden: false, relationship: relationship, description: description, creationDate: dateInv, modifiedDate: dateInvStor, type: 'application/xml' } as Attachment } }),
     footer: (currentPage, pageCount) => {
       return {

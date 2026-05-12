@@ -9,6 +9,7 @@ import { Faktura as Faktura2 } from './lib-public/types/fa2.types';
 import { Faktura as Faktura3 } from './lib-public/types/fa3.types';
 import { FaRR } from './lib-public/types/FaRR.types';
 import { AdditionalDataTypes } from './lib-public/types/common.types';
+import { initI18next } from "./lib-public/i18n/i18n-init";
 import Base64url from "crypto-js/enc-base64url"
 import SHA256 from "crypto-js/sha256";
 import os from 'node:os';
@@ -124,7 +125,7 @@ async function main() {
    
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
-KSeF PDF Generator - ver. 1.4.5
+KSeF PDF Generator - ver. 1.5.0
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -170,7 +171,9 @@ Example:
   let is_linux = false;
   let inputFiles = [];
   let pdf;
-  
+
+  await initI18next();
+
   let os_str: string = os.platform()
   if (os_str.toLowerCase() == "linux") {
     is_linux = true;
@@ -198,7 +201,7 @@ Example:
   }
 
   if (!is_q) console.log(`
-KSeF PDF Generator - ver. 1.4.5
+KSeF PDF Generator - ver. 1.5.0
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);

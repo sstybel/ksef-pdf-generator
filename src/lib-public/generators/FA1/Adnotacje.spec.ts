@@ -123,3 +123,6 @@ describe('generateAdnotacje - additional coverage', () => {
 });
 
 
+
+
+

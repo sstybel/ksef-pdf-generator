@@ -246,3 +246,6 @@ describe(generujRachunekBankowy.name, () => {
 });
 
 
+
+
+
