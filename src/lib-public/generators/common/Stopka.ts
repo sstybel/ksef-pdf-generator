@@ -218,3 +218,7 @@ function generateQR2CodeData(additionalData?: AdditionalDataTypes): Content[] {
 
 
 
+
+
+
+

@@ -25,7 +25,7 @@ In version [**1.4.0 releases**](https://github.com/sstybel/ksef-pdf-generator/re
 
 In this version [**1.4.5 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.4.5), we have added support for **RR invoices** (**FA-RR**) and made improvements to streamline the invoice generation process. Support for converting the **` & `** character to the HTML tag **`&amp`** has also been added, and the **`<![CDATA[ ... ]]>`** tag has been removed from the **KSeF invoice** file in **XML** format.
 
-To this version [**1.5.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.5.0), the tool now includes support for localization and translation through the use of the i18next library.
+To this version [**1.5.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.5.0), the tool now includes support for localization and translation through the use of the i18next library. Fixed an issue with correctly generating dates in the **DD.MM.YYYY** (e.g. **14.05.2026**) pattern.
 
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 

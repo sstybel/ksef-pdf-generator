@@ -37,6 +37,8 @@ export function formatDateTime(data?: string, withoutSeconds?: boolean, withoutT
 }
 
 export function formatDateTimePl(value: string, withTime?: boolean, withSeconds?: boolean): string {
+  return formatDateTime(value, withSeconds, !withTime);
+/*
   const optionsForDate: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
   const optionsForTime: Intl.DateTimeFormatOptions = {
     hour: '2-digit',
@@ -61,6 +63,7 @@ export function formatDateTimePl(value: string, withTime?: boolean, withSeconds?
   })
     .format(date)
     .replace(', ', ' ');
+*/
 }
 
 export function getDateTimeWithoutSeconds(isoDate?: FP2): string {

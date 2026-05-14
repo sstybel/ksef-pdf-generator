@@ -44,3 +44,7 @@ export function generatePodmiotUpowazniony(podmiotUpowazniony: PodmiotUpowaznion
 
 
 
+
+
+
+

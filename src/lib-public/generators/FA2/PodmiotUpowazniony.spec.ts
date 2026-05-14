@@ -112,3 +112,7 @@ describe(generatePodmiotUpowazniony.name, () => {
 
 
 
+
+
+
+
