@@ -117,3 +117,4 @@ export function generateWarunkiTransakcji(warunkiTransakcji: WarunkiTransakcji |
 
 
 
+

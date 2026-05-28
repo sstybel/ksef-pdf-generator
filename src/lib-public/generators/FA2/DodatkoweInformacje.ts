@@ -106,3 +106,4 @@ function generateDodatkowyOpis(fakturaZaliczkowaData: DodatkowyOpi[] | undefined
 
 
 
+

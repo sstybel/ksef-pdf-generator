@@ -99,3 +99,4 @@ describe('OkresFa period scope', () => {
     expect(collectTextValues(okresFaColumnItem)).toEqual(expect.arrayContaining(expectedDates));
   });
 });
+
