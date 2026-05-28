@@ -146,7 +146,7 @@ function createTable(
   const definedHeader: Content[] = cols.map((item: Kol): string | ContentText =>
     formatText(makeBreakable(item.NKom?._text), FormatTyp.GrayBoldTitle)
   );
-  const tableBody: TableCell[] = [];
+  const tableBody: TableCell[][] = [];
 
   getTable(rows).forEach((item: Wiersz): void => {
     const WKom: FP[] = getTable(item.WKom);
@@ -158,7 +158,7 @@ function createTable(
 
     if (cuttedRows.length >= subTableIndex + 1) {
       tableBody.push(
-        ...cuttedRows[subTableIndex].map((subItem: FP, index: number): TableCell => {
+        cuttedRows[subTableIndex].map((subItem: FP, index: number): TableCell => {
           let formatType = FormatTyp.Value;
           const typeKey = cols[index]._attributes?.Typ;
           const formatTypeAttribute = typeKey ? TableDataType[typeKey] : undefined;
@@ -249,7 +249,6 @@ export function chunkArray<T>(columns: T[]): T[][] {
     return result;
   }
 }
-
 
 
 

@@ -1,5 +1,23 @@
 import { describe, expect, it } from 'vitest';
-import { chunkArray } from './Zalaczniki';
+import { chunkArray, generateZalaczniki } from './Zalaczniki';
+
+function findTableBodies(node: unknown, result: unknown[][][] = []): unknown[][][] {
+  if (!node || typeof node !== 'object') {
+    return result;
+  }
+
+  if ('table' in node && node.table && typeof node.table === 'object' && 'body' in node.table) {
+    result.push(node.table.body as unknown[][]);
+  }
+
+  if (Array.isArray(node)) {
+    node.forEach((child) => findTableBodies(child, result));
+    return result;
+  }
+
+  Object.values(node).forEach((child) => findTableBodies(child, result));
+  return result;
+}
 
 describe('chunkArray', () => {
   it('should return empty array if input is not array', () => {
@@ -64,7 +82,42 @@ describe('chunkArray', () => {
   });
 });
 
+describe('generateZalaczniki', () => {
+  it('should render attachment table body rows as row arrays', () => {
+    const result = generateZalaczniki({
+      BlokDanych: {
+        ZNaglowek: { _text: 'Settlement details' },
+        Tabela: {
+          TNaglowek: {
+            Kol: [
+              { NKom: { _text: 'No.' } },
+              { NKom: { _text: 'Description' } },
+              { NKom: { _text: 'Period' } },
+              { NKom: { _text: 'Amount' } },
+            ],
+          },
+          Wiersz: [
+            {
+              WKom: [
+                { _text: '1' },
+                { _text: 'Subscription' },
+                { _text: '2026-05' },
+                { _text: '123.00' },
+              ],
+            },
+          ],
+        },
+      },
+    } as any);
 
+    const bodies = findTableBodies(result);
+    const attachmentBody = bodies.find((body) => body.some((row) => Array.isArray(row) && row.length === 4));
+
+    expect(attachmentBody).toBeDefined();
+    expect(attachmentBody?.every(Array.isArray)).toBe(true);
+    expect(attachmentBody?.[1]).toHaveLength(4);
+  });
+});
 
 
 
