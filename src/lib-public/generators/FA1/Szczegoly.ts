@@ -122,7 +122,7 @@ function generateP_6Scope(P_6_Od: TypesOfValues, P_6_Do: TypesOfValues, i18n: an
 
   if (hasValue(P_6_Od) && hasValue(P_6_Do)) {
     table.push(
-      createLabelTextArray([
+      ...createLabelTextArray([
         {
           value: i18n.t('invoice.details.deliveryOrServiceDateFrom'),
         },
@@ -133,14 +133,14 @@ function generateP_6Scope(P_6_Od: TypesOfValues, P_6_Do: TypesOfValues, i18n: an
     );
   } else if (hasValue(P_6_Od)) {
     table.push(
-      createLabelText(
+      ...createLabelText(
         i18n.t('invoice.details.deliveryOrServiceDateFrom'),
         formatDateTime(getValue(P_6_Od) as string, true, true)
       )
     );
   } else if (hasValue(P_6_Do)) {
     table.push(
-      createLabelText(
+      ...createLabelText(
         i18n.t('invoice.details.deliveryOrServiceDateTo'),
         formatDateTime(getValue(P_6_Do) as string, true, true)
       )
@@ -175,14 +175,3 @@ function generateFakturaZaliczkowa(fakturaZaliczkowa: FP[] | undefined, i18n: an
   }
   return table;
 }
-
-
-
-
-
-
-
-
-
-
-
