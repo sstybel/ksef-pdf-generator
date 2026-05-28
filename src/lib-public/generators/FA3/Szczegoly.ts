@@ -200,11 +200,3 @@ function generateFakturaZaliczkowa(fakturaZaliczkowaData: ObjectKeysOfFP[] | und
   }
   return table;
 }
-
-
-
-
-
-
-
-

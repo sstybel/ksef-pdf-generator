@@ -27,6 +27,9 @@ In this version [**1.4.5 releases**](https://github.com/sstybel/ksef-pdf-generat
 
 To this version [**1.5.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.5.0), the tool now includes support for localization and translation through the use of the i18next library. Fixed an issue with correctly generating dates in the **DD.MM.YYYY** (e.g. **14.05.2026**) pattern.
 
+In version [**1.5.5 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.5.5), the issue described by ([**Attilasix**](https://github.com/Attilasix) - Issue: [**attachment
+ #5**](https://github.com/sstybel/ksef-pdf-generator/issues/5)) regarding an error in the XML attachments section (Attachment) has been resolved. Thanks to [**@lkow (Łukasz Kowalski**](https://github.com/lkow), the problem has been fixed 👍.
+
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
 &nbsp;

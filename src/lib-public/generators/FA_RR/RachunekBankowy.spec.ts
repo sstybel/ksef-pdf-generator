@@ -241,3 +241,5 @@ describe(generujRachunekBankowy.name, () => {
 
 
 
+
+
