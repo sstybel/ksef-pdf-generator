@@ -125,7 +125,7 @@ async function main() {
    
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
-KSeF PDF Generator - ver. 1.5.0
+KSeF PDF Generator - ver. 1.5.5
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);
@@ -201,7 +201,7 @@ Example:
   }
 
   if (!is_q) console.log(`
-KSeF PDF Generator - ver. 1.5.0
+KSeF PDF Generator - ver. 1.5.5
 Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
 ------------------------------------------------------------------------------
 `);

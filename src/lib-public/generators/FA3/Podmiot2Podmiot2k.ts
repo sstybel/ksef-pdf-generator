@@ -73,3 +73,5 @@ export function generatePodmiot2Podmiot2K(podmiot2: Podmiot2, podmiot2K: Podmiot
 
 
 
+
+

@@ -528,3 +528,5 @@ describe(generateWarunkiTransakcji.name, () => {
 
 
 
+
+

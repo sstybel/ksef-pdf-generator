@@ -89,3 +89,5 @@ export const generujRachunekBankowy = (accounts?: RachunekBankowy[], title?: str
 
 
 
+
+
