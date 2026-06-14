@@ -106,7 +106,3 @@ describe(generatePodmiot1.name, (): void => {
 
 
 
-
-
-
-

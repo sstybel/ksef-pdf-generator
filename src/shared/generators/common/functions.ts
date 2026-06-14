@@ -1,4 +1,5 @@
 import { FP as FP2 } from '../../../lib-public/types/fa2.types';
+import packageInfo from '../../../../package.json';
 import i18n from 'i18next';
 
 export function translateMap(value: FP2 | string | undefined, map: Record<string, string>): string {
@@ -37,8 +38,6 @@ export function formatDateTime(data?: string, withoutSeconds?: boolean, withoutT
 }
 
 export function formatDateTimePl(value: string, withTime?: boolean, withSeconds?: boolean): string {
-  return formatDateTime(value, withSeconds, !withTime);
-/*
   const optionsForDate: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
   const optionsForTime: Intl.DateTimeFormatOptions = {
     hour: '2-digit',
@@ -63,7 +62,6 @@ export function formatDateTimePl(value: string, withTime?: boolean, withSeconds?
   })
     .format(date)
     .replace(', ', ' ');
-*/
 }
 
 export function getDateTimeWithoutSeconds(isoDate?: FP2): string {
@@ -91,4 +89,15 @@ export function formatTime(data?: string, withoutSeconds?: boolean): string {
     return `${hours}:${minutes}`;
   }
   return `${hours}:${minutes}:${seconds}`;
+}
+
+export function createVersionLabel(application?: string): string {
+  const str_ver = `${packageInfo.version}`;
+  const str_author = `${packageInfo.author}`;
+  const str_appname = `${packageInfo.name}`;
+  const str_homepage = `${packageInfo.homepage}`;
+  const str_lastyear = `${packageInfo.lastyear}`;
+  const str_copyright = `Copyright (c) 2025 - ${str_lastyear} by ${str_author}, ${str_homepage}`;
+
+  return `${application || i18n.t('invoice.footer.appName')} (${packageInfo.name} - ${i18n.t('invoice.footer.version')} ${packageInfo.version})\n${str_copyright}`;
 }

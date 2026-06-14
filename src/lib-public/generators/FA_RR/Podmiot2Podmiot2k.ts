@@ -5,7 +5,6 @@ import {
   formatText,
   generateColumns,
   getTable,
-  getValue,
   hasValue,
   verticalSpacing,
 } from '../../../shared/PDF-functions';
@@ -85,10 +84,6 @@ export function generateCorrectedContent(podmiot: Podmiot1Class | Podmiot1KClass
   }
   return result;
 }
-
-
-
-
 
 
 

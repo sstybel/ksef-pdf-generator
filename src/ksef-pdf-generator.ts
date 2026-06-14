@@ -9,8 +9,9 @@ import { Faktura as Faktura2 } from './lib-public/types/fa2.types';
 import { Faktura as Faktura3 } from './lib-public/types/fa3.types';
 import { FaRR } from './lib-public/types/FaRR.types';
 import { AdditionalDataTypes } from './lib-public/types/common.types';
-import { initI18next } from "./lib-public/i18n/i18n-init";
+import { i18nReady } from './lib-public/i18n/i18n-init';
 import Base64url from "crypto-js/enc-base64url"
+import packageInfo from '../package.json';
 import SHA256 from "crypto-js/sha256";
 import os from 'node:os';
 
@@ -122,11 +123,18 @@ function parseXMLFromFile(filePath: string, is_linux: boolean): unknown {
 
 async function main() {
   const args = process.argv.slice(2);
+
+  const str_ver = `${packageInfo.version}`;
+  const str_author = `${packageInfo.author}`;
+  const str_appname = `${packageInfo.name}`;
+  const str_homepage = `${packageInfo.homepage}`;
+  const str_lastyear = `${packageInfo.lastyear}`;
+  const str_copyright = `Copyright (c) 2025 - ${str_lastyear} by ${str_author}, ${str_homepage}`;
    
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
-KSeF PDF Generator - ver. 1.6.0
-Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
+${str_appname} - ver. ${str_ver}
+${str_copyright}
 ------------------------------------------------------------------------------
 `);
 
@@ -172,8 +180,8 @@ Example:
   let inputFiles = [];
   let pdf;
 
-  await initI18next();
-
+  await i18nReady;
+  
   let os_str: string = os.platform()
   if (os_str.toLowerCase() == "linux") {
     is_linux = true;
@@ -201,8 +209,8 @@ Example:
   }
 
   if (!is_q) console.log(`
-KSeF PDF Generator - ver. 1.6.0
-Copyright (c) 2025 - 2026 by Sebastian Stybel, www.BONO-IT.pl
+${str_appname} - ver. ${str_ver}
+${str_copyright}
 ------------------------------------------------------------------------------
 `);
 

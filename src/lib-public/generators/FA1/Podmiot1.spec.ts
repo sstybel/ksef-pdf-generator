@@ -100,7 +100,3 @@ describe('generatePodmiot1', () => {
 
 
 
-
-
-
-

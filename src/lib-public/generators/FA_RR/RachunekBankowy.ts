@@ -27,7 +27,7 @@ export const generujRachunekBankowy = (accounts?: RachunekBankowy[], title?: str
 
     table.push([
       formatText(i18n.t('invoice.registers.fullAccountNumber'), FormatTyp.GrayBoldTitle),
-      formatText(getValue(account.NrRB), FormatTyp.Default),
+      formatText(getValue(account.NrRB), FormatTyp.AccountNumber),
     ]);
     table.push([
       formatText(i18n.t('invoice.registers.swiftCode'), FormatTyp.GrayBoldTitle),
@@ -71,11 +71,6 @@ export const generujRachunekBankowy = (accounts?: RachunekBankowy[], title?: str
 
   return createSection(result, false, [0, 0, 0, 0]);
 };
-
-
-
-
-
 
 
 

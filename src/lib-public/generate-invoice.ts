@@ -4,12 +4,12 @@ import { generateFA2 } from './FA2-generator';
 import { Faktura as Faktura2 } from './types/fa2.types';
 import { generateFA3 } from './FA3-generator';
 import { Faktura as Faktura3 } from './types/fa3.types';
-import { parseXML } from '../shared/XML-parser';
 import { TCreatedPdf } from 'pdfmake/build/pdfmake';
 import { AdditionalDataTypes } from './types/common.types';
 import { generateFARR } from './FARR-generator';
 import { FaRR } from './types/FaRR.types';
-import { initI18next } from "./i18n/i18n-init";
+import { parseXML } from '@shared/XML-parser';
+import { i18nReady } from './i18n/i18n-init';
 
 export async function generateInvoice(
   file: File,
@@ -31,38 +31,33 @@ export async function generateInvoice(
 
   let pdf: TCreatedPdf;
 
-  await initI18next();
+  await i18nReady;
 
-  return new Promise((resolve): void => {
-    switch (wersja) {
-      case 'FA (1)':
-        pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData);
-        break;
-      case 'FA (2)':
-        pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData);
-        break;
-      case 'FA (3)':
-        pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData);
-        break;
-      case 'FA_RR (1)':
-      case 'FA_RR(1)':
-        pdf = generateFARR((xml as any).Faktura as FaRR, additionalData);
-        break;
-    }
+  switch (wersja) {
+    case 'FA (1)':
+      pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData);
+      break;
+    case 'FA (2)':
+      pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData);
+      break;
+    case 'FA (3)':
+      pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData);
+      break;
+    case 'FA_RR (1)':
+    case 'FA_RR(1)':
+      pdf = generateFARR((xml as any).Faktura as FaRR, additionalData);
+      break;
+    default:
+      throw new Error(`Unknown XML Version: ${wersja}`);
+  }
 
-    switch (formatType) {
-      case 'blob':
-        pdf.getBlob().then((blob: Blob): void => {
-          resolve(blob);
-        });
-        break;
-      case 'base64':
-      default:
-        pdf.getBase64().then((base64: string): void => {
-          resolve(base64);
-        });
-    }
-  });
+  switch (formatType) {
+    case 'blob':
+      return pdf.getBlob();
+    case 'base64':
+    default:
+      return pdf.getBase64();
+  }
 }
 
 type FormatType = 'blob' | 'base64';

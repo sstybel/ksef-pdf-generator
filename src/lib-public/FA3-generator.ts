@@ -1,8 +1,6 @@
 import pdfMake, { TCreatedPdf } from 'pdfmake/build/pdfmake';
-import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Content, TDocumentDefinitions, Attachment } from 'pdfmake/interfaces';
 import { generateStyle, getValue, hasValue } from '../shared/PDF-functions';
-import { TRodzajFaktury } from '../shared/consts/FA.const';
 import { generateAdnotacje } from './generators/FA3/Adnotacje';
 import { generateDodatkoweInformacje } from './generators/FA3/DodatkoweInformacje';
 import { generatePlatnosc } from './generators/FA3/Platnosc';
@@ -20,8 +18,11 @@ import { generateStopka } from './generators/common/Stopka';
 import { Faktura } from './types/fa3.types';
 import { ZamowienieKorekta } from './enums/invoice.enums';
 import { AdditionalDataTypes } from './types/common.types';
-import { Position } from '../shared/enums/common.enum';
 import { generateWatermark } from '../shared/consts/watermark';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { TRodzajFaktury } from '../shared/consts/FA.const';
+import { Position } from '../shared/enums/common.enum';
+import i18n from 'i18next';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
@@ -29,6 +30,7 @@ export function generateFA3(invoice: Faktura, additionalData: AdditionalDataType
   const isKOR_RABAT: boolean =
     invoice.Fa?.RodzajFaktury?._text == TRodzajFaktury.KOR && hasValue(invoice.Fa?.OkresFaKorygowanej);
   const rabatOrRowsInvoice: Content = isKOR_RABAT ? generateRabat(invoice.Fa!) : generateWiersze(invoice.Fa!);
+
   const docDefinition: TDocumentDefinitions = {
     ...generateWatermark(additionalData?.watermark),
     version: '1.7',
@@ -58,7 +60,7 @@ export function generateFA3(invoice: Faktura, additionalData: AdditionalDataType
     ...(dataUri && { files: { xml: { src: dataUri, name: filename, hidden: false, relationship: relationship, description: description, creationDate: dateInv, modifiedDate: dateInvStor, type: 'application/xml' } as Attachment } }),
     footer: (currentPage, pageCount) => {
       return {
-        text: currentPage.toString() + ' z ' + pageCount,
+        text: `${currentPage.toString()} ${i18n.t('invoice.footer.pagesTotal')} ${pageCount}`,
         alignment: Position.RIGHT,
         margin: [0, 0, 40, 0],
       };

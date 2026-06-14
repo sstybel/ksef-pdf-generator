@@ -275,7 +275,3 @@ function addToColumn(
 
 
 
-
-
-
-

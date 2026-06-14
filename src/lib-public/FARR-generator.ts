@@ -15,6 +15,7 @@ import { generateWiersze } from './generators/FA_RR/Wiersze';
 import { AdditionalDataTypes } from './types/common.types';
 import { FaRR } from './types/FaRR.types';
 import { generateWatermark } from '../shared/consts/watermark';
+import i18n from 'i18next';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
@@ -37,7 +38,7 @@ export function generateFARR(invoice: FaRR, additionalData: AdditionalDataTypes,
     ...(dataUri && { files: { xml: { src: dataUri, name: filename, hidden: false, relationship: relationship, description: description, creationDate: dateInv, modifiedDate: dateInvStor, type: 'application/xml' } as Attachment } }),
     footer: (currentPage, pageCount) => {
       return {
-        text: currentPage.toString() + ' z ' + pageCount,
+        text: `${currentPage.toString()} ${i18n.t('invoice.footer.pagesTotal')} ${pageCount}`,
         alignment: Position.RIGHT,
         margin: [0, 0, 40, 0],
       };

@@ -10,23 +10,26 @@ export function generateDaneIdentyfikacyjne(daneIdentyfikacyjne: DaneIdentyfikac
   if (hasValue(daneIdentyfikacyjne.ImiePierwsze) || hasValue(daneIdentyfikacyjne.Nazwisko)) {
     result.push(
       createLabelText(
-          i18n.t('invoice.subjectIdentificationData.nameSurname'),
+        i18n.t('invoice.subjectIdentificationData.nameSurname'),
         `${getValue(daneIdentyfikacyjne.ImiePierwsze)} ${getValue(daneIdentyfikacyjne.Nazwisko)}`
       )
     );
   }
   if (daneIdentyfikacyjne.PelnaNazwa) {
-    result.push(createLabelText(i18n.t('invoice.subjectIdentificationData.fullName'), daneIdentyfikacyjne.PelnaNazwa));
+    result.push(
+      createLabelText(i18n.t('invoice.subjectIdentificationData.fullName'), daneIdentyfikacyjne.PelnaNazwa)
+    );
   }
   if (daneIdentyfikacyjne.Nazwisko) {
-    result.push(createLabelText(i18n.t('invoice.subjectIdentificationData.tradeName'), daneIdentyfikacyjne.NazwaHandlowa));
+    result.push(
+      createLabelText(
+        i18n.t('invoice.subjectIdentificationData.tradeName'),
+        daneIdentyfikacyjne.NazwaHandlowa
+      )
+    );
   }
   return result;
 }
-
-
-
-
 
 
 

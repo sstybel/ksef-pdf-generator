@@ -57,7 +57,3 @@ describe('generateNaglowek', () => {
 
 
 
-
-
-
-

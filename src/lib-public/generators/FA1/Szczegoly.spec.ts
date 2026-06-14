@@ -190,7 +190,3 @@ describe(generateSzczegoly.name, () => {
 
 
 
-
-
-
-

@@ -1,12 +1,5 @@
 import { Content } from 'pdfmake/interfaces';
-import {
-  createHeader,
-  createLabelText,
-  formatText,
-  getTable,
-  getValue,
-  hasValue,
-} from '../../../shared/PDF-functions';
+import { createHeader, createLabelText, formatText, getTable, hasValue } from '../../../shared/PDF-functions';
 import FormatTyp from '../../../shared/enums/common.enum';
 import { Podmiot1 } from '../../types/fa1.types';
 import { generatePodmiotAdres } from './PodmiotAdres';
@@ -55,10 +48,6 @@ export function generatePodmiot1(podmiot1: Podmiot1): Content[] {
   }
   return result;
 }
-
-
-
-
 
 
 

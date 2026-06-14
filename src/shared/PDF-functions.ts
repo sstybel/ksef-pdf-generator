@@ -108,6 +108,12 @@ function formatValue(
         : `${dotToComma(Number(value).toFixed(2))} ${currency}`;
       result.fontSize = 10;
       break;
+    case FormatTyp.CurrencyGreaterWithSeparator:
+      result.text = isNaN(Number(value))
+        ? (value as string)
+        : `${normalizeCurrencySeparator(value)} ${currency}`;
+      result.fontSize = 10;
+      break;
     case FormatTyp.Currency6:
       result.text = isNaN(Number(value))
         ? (value as string)
@@ -136,6 +142,9 @@ function formatValue(
       result.text = replaceDotWithCommaIfNeeded(value);
       result.alignment = Position.RIGHT;
       break;
+    case FormatTyp.AccountNumber:
+      result.text = formatBankAccountNumber(value as string);
+      break;
   }
 }
 
@@ -146,7 +155,9 @@ export function normalizeCurrencySeparator(value: string | number | undefined): 
 
   const numberWithComma = dotToComma(typeof value === 'string' ? value : value.toString());
 
-  if (numberWithComma.includes(',')) {
+  if (numberWithComma === '0') {
+    return numberWithComma;
+  } else if (numberWithComma.includes(',')) {
     const parts = numberWithComma.split(',');
 
     return addThousandSeparator(parts[1].length > 1 ? numberWithComma : numberWithComma + '0');
@@ -173,9 +184,10 @@ function dotToComma(value: string): string {
   return value.replace('.', ',');
 }
 
-export function hasValue(value: FP | string | number | undefined): boolean {
+export function hasValue(value: FP | string | number | undefined, zeroValidator: boolean = true): boolean {
   return (
-    !!((typeof value !== 'object' && value) || (typeof value === 'object' && value._text)) || value === 0
+    !!((typeof value !== 'object' && value) || (typeof value === 'object' && value._text)) ||
+    (zeroValidator && value === 0)
   );
 }
 
@@ -217,12 +229,14 @@ export function createLabelTextArray(data: CreateLabelTextData[]): Content[] {
 
 export function addThousandSeparator(
   value: string,
-  thousandSeparator: string = ' ',
-  decimalSeparator: string = ','
+  thousandSeparator = '\xa0',
+  decimalSeparator = ','
 ): string {
   const splitRegex = /\B(?=(\d{3})+(?!\d))/g;
+
   if (value.includes(decimalSeparator)) {
     const splitValue = value.split(decimalSeparator);
+
     return `${splitValue[0].replace(splitRegex, thousandSeparator)}${decimalSeparator}${splitValue[1]}`;
   } else {
     return value.replace(splitRegex, thousandSeparator);
@@ -601,4 +615,31 @@ export function makeBreakable(
     return value.replace(new RegExp(`(.{${wordBreak}})`, 'g'), '$1\u200B');
   }
   return value;
+}
+
+function splitStringAfter(input: string, after: number): string[] {
+  return input.split('').reduce((acc: string[], char, index) => {
+    if (index % after === 0) {
+      acc.push('');
+    }
+    acc[acc.length - 1] += char;
+    return acc;
+  }, []);
+}
+
+export function formatBankAccountNumber(number: string): string {
+  if (number.length <= 12) return number;
+
+  if (/\s/.test(number.trim())) return number.trim();
+
+  const startsWithLetterOrSymbolRegex = /^[a-z!-\/:-@[-`{-~]/i;
+
+  if (number.charAt(0).match(startsWithLetterOrSymbolRegex)) {
+    number = splitStringAfter(number.replace(/ /g, ''), 4).join(' ');
+  } else {
+    const firstTwoCharacters = number.substring(0, 2);
+    number = `${firstTwoCharacters} ${splitStringAfter(number.substring(2).replace(/ /g, ''), 4).join(' ')}`;
+  }
+
+  return number;
 }

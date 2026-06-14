@@ -516,7 +516,10 @@
     },
     "footer": {
       "generatedIn": "Wytworzona w: ",
-      "margin": "marża"
+      "margin": "marża",
+      "pagesTotal": "z",
+      "version": "wersja",
+      "appName": "Aplikacja Podatnika KSeF"
     },
     "header": {
       "advance": "Faktura zaliczkowa",
@@ -671,6 +674,7 @@
       "stateBefore": "Stan przed",
       "taxRate": "Stawka podatku",
       "totalAmountDue": "Kwota należności ogółem: ",
+      "totalAmountDueCorrection": "Korekta kwoty należności ogółem: ",
       "uniqueRowNumber": "Unikalny numer wiersza",
       "unit": "Miara",
       "unitPrice": "Cena jedn.",
@@ -687,7 +691,8 @@
       "toPay": "Do zapłaty: ",
       "toSettle": "Do rozliczenia: ",
       "totalCharges": "Suma kwot obciążenia: ",
-      "totalDeductions": "Suma kwot odliczenia: "
+      "totalDeductions": "Suma kwot odliczenia: ",
+      "amount": "Kwota"
     },
     "subject1": {
       "address": "Adres",

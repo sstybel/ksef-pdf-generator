@@ -5,7 +5,6 @@ import {
   createSubHeader,
   generateColumns,
   getTable,
-  getValue,
   verticalSpacing,
 } from '../../../shared/PDF-functions';
 import { Podmiot1, Podmiot1K } from '../../types/fa1.types';
@@ -80,10 +79,6 @@ export function generateCorrectedContent(podmiot: Podmiot1 | Podmiot1K, headerTe
   }
   return result;
 }
-
-
-
-
 
 
 

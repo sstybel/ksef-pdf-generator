@@ -54,7 +54,3 @@ export function generateRabat(invoice: Fa): Content[] {
 
 
 
-
-
-
-

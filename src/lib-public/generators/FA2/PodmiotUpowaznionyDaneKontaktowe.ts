@@ -43,7 +43,3 @@ export function generatePodmiotUpowaznionyDaneKontaktowe(
 
 
 
-
-
-
-
