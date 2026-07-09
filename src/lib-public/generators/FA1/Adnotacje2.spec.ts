@@ -46,10 +46,3 @@ describe(generateDostawy.name, () => {
   });
 });
 
-
-
-
-
-
-
-

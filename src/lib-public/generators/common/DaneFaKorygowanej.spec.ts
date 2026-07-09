@@ -88,10 +88,3 @@ describe('generateDaneFaKorygowanej', () => {
   });
 });
 
-
-
-
-
-
-
-

@@ -68,10 +68,3 @@ describe(generatePodmiotAdres.name, () => {
   });
 });
 
-
-
-
-
-
-
-

@@ -624,10 +624,3 @@ describe(generateSzczegoly.name, () => {
   });
 });
 
-
-
-
-
-
-
-

@@ -167,10 +167,3 @@ describe(generatePrzewoznik.name, () => {
   });
 });
 
-
-
-
-
-
-
-

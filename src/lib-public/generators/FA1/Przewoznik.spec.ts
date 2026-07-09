@@ -33,10 +33,3 @@ describe('generatePrzewoznik', () => {
   });
 });
 
-
-
-
-
-
-
-

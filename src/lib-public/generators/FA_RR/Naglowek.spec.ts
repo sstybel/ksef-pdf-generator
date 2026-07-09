@@ -50,10 +50,3 @@ describe('generateNaglowek', () => {
   });
 });
 
-
-
-
-
-
-
-

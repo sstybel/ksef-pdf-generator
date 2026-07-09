@@ -52,10 +52,3 @@ export function generateNaglowek(fa?: Fa, additionalData?: AdditionalDataTypes):
   ];
 }
 
-
-
-
-
-
-
-

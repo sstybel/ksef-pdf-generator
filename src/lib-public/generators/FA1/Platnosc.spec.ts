@@ -110,10 +110,3 @@ describe('generatePlatnosc', () => {
   });
 });
 
-
-
-
-
-
-
-

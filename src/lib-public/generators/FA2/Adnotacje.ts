@@ -219,10 +219,3 @@ export function generateDostawy(noweSrodkiTransportu: NoweSrodkiTransportu): Con
   return tableBody.length ? [table, verticalSpacing(1)] : [];
 }
 
-
-
-
-
-
-
-

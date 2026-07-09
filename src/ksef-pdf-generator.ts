@@ -106,7 +106,7 @@ function stripPrefixes<T>(obj: T): T {
 }
 
 function convert_amp_to_htmlamp(str: string): string {
-  return str.replace(/>(.*?)&/g, (match, p1) => `>${p1}&amp;`);
+  return str.replace(/&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)/g, '&amp;'); // Old version: return str.replace(/>(.*?)&/g, (match, p1) => `>${p1}&amp;`);
 }
 
 function remove_CDATA_tags(str: string): string {

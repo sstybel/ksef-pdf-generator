@@ -90,10 +90,3 @@ describe(generateDodatkoweInformacje.name, () => {
   });
 });
 
-
-
-
-
-
-
-

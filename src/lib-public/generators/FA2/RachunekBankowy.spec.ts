@@ -245,10 +245,3 @@ describe(generujRachunekBankowy.name, () => {
     });
   });
 });
-
-
-
-
-
-
-

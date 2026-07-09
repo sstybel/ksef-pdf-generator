@@ -77,10 +77,3 @@ describe(generatePodmiotUpowaznionyDaneKontaktowe.name, () => {
   });
 });
 
-
-
-
-
-
-
-

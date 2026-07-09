@@ -186,10 +186,3 @@ describe(generateDostawy.name, () => {
   });
 });
 
-
-
-
-
-
-
-

@@ -67,10 +67,3 @@ describe('generatePodmiot2', () => {
   });
 });
 
-
-
-
-
-
-
-

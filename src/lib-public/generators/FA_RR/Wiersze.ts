@@ -171,10 +171,3 @@ export function generateWiersze(fa: Fa): Content {
   return createSection([...createHeader(i18n.t('invoice.rows.header')), ...table, opis], true);
 }
 
-
-
-
-
-
-
-

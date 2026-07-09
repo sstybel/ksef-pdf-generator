@@ -268,10 +268,3 @@ function addToColumn(
   firstColumn.push(content);
 }
 
-
-
-
-
-
-
-

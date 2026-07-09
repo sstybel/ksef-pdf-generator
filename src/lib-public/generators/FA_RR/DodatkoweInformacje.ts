@@ -116,10 +116,3 @@ function generateDodatkowyOpis(dodatkowyOpis: DodatkowyOpi[] | undefined): Conte
   return table;
 }
 
-
-
-
-
-
-
-

@@ -115,10 +115,3 @@ describe(generatePodmioty.name, () => {
   });
 });
 
-
-
-
-
-
-
-

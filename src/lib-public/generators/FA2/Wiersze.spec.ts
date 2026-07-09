@@ -365,10 +365,3 @@ describe(generateWiersze.name, () => {
     });
   });
 });
-
-
-
-
-
-
-

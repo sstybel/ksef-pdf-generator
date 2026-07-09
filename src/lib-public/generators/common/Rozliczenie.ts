@@ -147,10 +147,3 @@ export function generateRozliczenie(
   return createSection(result, true);
 }
 
-
-
-
-
-
-
-

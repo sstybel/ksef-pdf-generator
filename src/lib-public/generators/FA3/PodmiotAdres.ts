@@ -19,10 +19,3 @@ export function generatePodmiotAdres(
   ];
 }
 
-
-
-
-
-
-
-

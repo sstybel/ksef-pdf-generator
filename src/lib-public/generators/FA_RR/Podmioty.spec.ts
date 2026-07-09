@@ -82,10 +82,3 @@ describe(generatePodmioty.name, () => {
   });
 });
 
-
-
-
-
-
-
-

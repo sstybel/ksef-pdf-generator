@@ -61,10 +61,3 @@ describe(generatePlatnosc.name, () => {
   });
 });
 
-
-
-
-
-
-
-

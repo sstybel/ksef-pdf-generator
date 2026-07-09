@@ -99,10 +99,3 @@ describe('generateRozliczenie', (): void => {
   });
 });
 
-
-
-
-
-
-
-

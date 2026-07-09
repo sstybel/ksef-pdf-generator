@@ -45,10 +45,3 @@ describe(generateDaneKontaktowe.name, () => {
   });
 });
 
-
-
-
-
-
-
-

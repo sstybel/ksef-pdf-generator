@@ -251,10 +251,3 @@ describe(generateRabat.name, () => {
   });
 });
 
-
-
-
-
-
-
-

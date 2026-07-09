@@ -85,10 +85,3 @@ export function generateDaneIdentyfikacyjneTPodmiot3Dto(
   return result;
 }
 
-
-
-
-
-
-
-

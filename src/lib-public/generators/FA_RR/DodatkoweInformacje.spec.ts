@@ -58,10 +58,3 @@ describe(generateDodatkoweInformacje.name, () => {
   });
 });
 
-
-
-
-
-
-
-

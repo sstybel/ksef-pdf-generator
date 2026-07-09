@@ -126,10 +126,3 @@ describe('generateAdnotacje - additional coverage', () => {
   });
 });
 
-
-
-
-
-
-
-

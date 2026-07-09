@@ -70,10 +70,3 @@ export function generatePodmiotUpowazniony(podmiot: PodmiotUpowazniony | undefin
   return result;
 }
 
-
-
-
-
-
-
-

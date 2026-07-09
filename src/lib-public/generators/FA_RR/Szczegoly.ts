@@ -49,10 +49,3 @@ export function generateSzczegoly(fa: Fa): Content[] {
   return createSection(table, true);
 }
 
-
-
-
-
-
-
-

@@ -95,10 +95,3 @@ describe('getSummaryTaxRate', () => {
   });
 });
 
-
-
-
-
-
-
-

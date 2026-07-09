@@ -232,10 +232,3 @@ describe(generujRachunekBankowy.name, () => {
     });
   });
 });
-
-
-
-
-
-
-

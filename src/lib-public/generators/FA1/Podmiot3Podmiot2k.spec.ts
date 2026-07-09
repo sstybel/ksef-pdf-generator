@@ -77,10 +77,3 @@ describe('generateDaneIdentyfikacyjneTPodmiot3Dto', () => {
   });
 });
 
-
-
-
-
-
-
-

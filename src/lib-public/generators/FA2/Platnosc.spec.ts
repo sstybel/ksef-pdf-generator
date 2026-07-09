@@ -119,10 +119,3 @@ describe(generatePlatnosc.name, () => {
   });
 });
 
-
-
-
-
-
-
-

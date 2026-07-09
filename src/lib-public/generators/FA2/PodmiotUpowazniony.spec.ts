@@ -108,10 +108,3 @@ describe(generatePodmiotUpowazniony.name, () => {
   });
 });
 
-
-
-
-
-
-
-

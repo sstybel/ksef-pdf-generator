@@ -70,10 +70,3 @@ export function generatePodmiot3(podmiot: Podmiot3, index: number): Content[] {
   return createSection(result, true);
 }
 
-
-
-
-
-
-
-

@@ -40,7 +40,7 @@ export function generateStopka(
   const result: Content = [
     verticalSpacing(1),
     ...(wzty.length ? [generateLine()] : []),
-    ...(wzty.length ? [generateTwoColumns(wzty, [])] : []),
+    ...(wzty.length ? [generateTwoColumns(wzty, [], undefined, false)] : []),
     ...(rejestry.length || informacje.length ? [generateLine()] : []),
     ...rejestry,
     ...informacje,
@@ -217,11 +217,4 @@ function generateQR2CodeData(additionalData?: AdditionalDataTypes): Content[] {
   }
   return createSection(result, true);
 }
-
-
-
-
-
-
-
 

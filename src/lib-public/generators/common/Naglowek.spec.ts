@@ -54,10 +54,3 @@ describe('generateNaglowek', () => {
   });
 });
 
-
-
-
-
-
-
-

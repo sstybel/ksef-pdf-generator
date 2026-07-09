@@ -31,10 +31,3 @@ export function generateNaglowekUPO(potwierdzenie: Potwierdzenie): Content[] {
   ];
 }
 
-
-
-
-
-
-
-

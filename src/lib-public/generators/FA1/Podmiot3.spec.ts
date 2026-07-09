@@ -96,10 +96,3 @@ describe('generatePodmiot3', () => {
   });
 });
 
-
-
-
-
-
-
-

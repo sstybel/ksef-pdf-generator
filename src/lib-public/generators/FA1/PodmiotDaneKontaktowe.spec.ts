@@ -48,10 +48,3 @@ describe('generateDaneKontaktowe', () => {
   });
 });
 
-
-
-
-
-
-
-

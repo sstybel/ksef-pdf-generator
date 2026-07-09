@@ -46,10 +46,3 @@ describe('generateDodatkoweInformacje', () => {
   });
 });
 
-
-
-
-
-
-
-

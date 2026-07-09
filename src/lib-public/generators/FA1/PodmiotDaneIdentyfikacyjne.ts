@@ -31,10 +31,3 @@ export function generateDaneIdentyfikacyjne(daneIdentyfikacyjne: DaneIdentyfikac
   return result;
 }
 
-
-
-
-
-
-
-

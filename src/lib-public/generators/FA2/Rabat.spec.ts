@@ -250,10 +250,3 @@ describe(generateRabat.name, () => {
   });
 });
 
-
-
-
-
-
-
-

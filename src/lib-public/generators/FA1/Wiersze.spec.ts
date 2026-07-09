@@ -384,10 +384,3 @@ describe(generateWiersze.name, () => {
     });
   });
 });
-
-
-
-
-
-
-

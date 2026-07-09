@@ -178,10 +178,3 @@ export function generateDokumentUPO(potwierdzenie: Potwierdzenie): Content[] {
   return result;
 }
 
-
-
-
-
-
-
-

@@ -123,10 +123,3 @@ describe(generatePodmioty.name, () => {
   });
 });
 
-
-
-
-
-
-
-

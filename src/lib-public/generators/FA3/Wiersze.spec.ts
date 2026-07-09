@@ -367,10 +367,3 @@ describe(generateWiersze.name, () => {
   });
 });
 
-
-
-
-
-
-
-

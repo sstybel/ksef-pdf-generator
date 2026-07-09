@@ -36,10 +36,3 @@ export function generatePodmiotUpowaznionyDaneKontaktowe(
   return result;
 }
 
-
-
-
-
-
-
-

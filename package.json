@@ -1,6 +1,6 @@
 {
   "name": "KSeF PDF Generator",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "lastyear": "2026",
   "scripts": {
     "ksef-pdf-generator": "tsx src/ksef-pdf-generator.ts"

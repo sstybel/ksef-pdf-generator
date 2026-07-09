@@ -28,13 +28,15 @@ In this version [**1.4.5 releases**](https://github.com/sstybel/ksef-pdf-generat
 To this version [**1.5.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.5.0), the tool now includes support for localization and translation through the use of the i18next library. Fixed an issue with correctly generating dates in the **DD.MM.YYYY** (e.g. **14.05.2026**) pattern.
 
 In version [**1.5.5 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.5.5), the issue described by ([**Attilasix**](https://github.com/Attilasix) - Issue: [**attachment
- #5**](https://github.com/sstybel/ksef-pdf-generator/issues/5)) regarding an error in the XML attachments section (Attachment) has been resolved. Thanks to [**@lkow (Łukasz Kowalski**](https://github.com/lkow), the problem has been fixed (Pull request: [**Fix attachment table row generation
+ #5**](https://github.com/sstybel/ksef-pdf-generator/issues/5)) regarding an error in the XML attachments section (Attachment) has been resolved. Thanks to [**@lkow (Łukasz Kowalski)**](https://github.com/lkow), the problem has been fixed (Pull request: [**Fix attachment table row generation
 #6**](https://github.com/sstybel/ksef-pdf-generator/pull/6)) 👍.
 
 In version [**1.6.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.6.0), the display of periods for invoices **FA1**, **FA2**, and **FA3** (**OkresFa.P_6_Od** and **OkresFa.P_6_Do**) has been corrected. This will place the generated content in the location for variants with two dates and one date. Fix (Pull request: [**Fix OkresFa period scope nesting
-#7**](https://github.com/sstybel/ksef-pdf-generator/pull/7)) implemented by [**@lkow (Łukasz Kowalski**](https://github.com/lkow) 👍.
+#7**](https://github.com/sstybel/ksef-pdf-generator/pull/7)) implemented by [**@lkow (Łukasz Kowalski)**](https://github.com/lkow) 👍.
 
 In version [**1.7.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.7.0), includes bug fixes and updates to the code based on version [**1.1.18**](https://github.com/CIRFMF/ksef-pdf-generator/releases/tag/1.1.18) from the fork **https://github.com/CIRFMF/ksef-pdf-generator** ([**@CIRF**](https://github.com/CIRFMF)).
+
+In version [**1.8.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.8.0), includes bug fixes and updates to the code based on version [**1.1.19**](https://github.com/CIRFMF/ksef-pdf-generator/releases/tag/1.1.19) from the fork **https://github.com/CIRFMF/ksef-pdf-generator** ([**@CIRF**](https://github.com/CIRFMF)) and add fix bug with double-escaped ampersands implemented by [**@FoolFresco (Vitalii Tanchuk)**](https://github.com/FoolFresco) 👍.
 
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 

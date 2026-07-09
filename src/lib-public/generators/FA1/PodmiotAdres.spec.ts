@@ -47,10 +47,3 @@ describe('generatePodmiotAdres', () => {
   });
 });
 
-
-
-
-
-
-
-
