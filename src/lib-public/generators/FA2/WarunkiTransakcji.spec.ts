@@ -539,3 +539,6 @@ describe(generateWarunkiTransakcji.name, () => {
   });
 });
 
+
+
+

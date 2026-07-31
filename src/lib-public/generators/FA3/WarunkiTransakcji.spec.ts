@@ -543,3 +543,6 @@ describe(generateWarunkiTransakcji.name, () => {
   });
 });
 
+
+
+

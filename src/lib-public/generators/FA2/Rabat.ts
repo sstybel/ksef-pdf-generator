@@ -47,3 +47,6 @@ export function generateRabat(invoice: Fa): Content[] {
   return createSection(result, true);
 }
 
+
+
+

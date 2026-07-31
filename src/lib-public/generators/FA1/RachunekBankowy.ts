@@ -84,3 +84,6 @@ export const generujRachunekBankowy: (accounts?: Record<string, FP>[], title?: s
   return createSection(result, false);
 };
 
+
+
+

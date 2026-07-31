@@ -318,3 +318,6 @@ export function getSummaryTaxRate(fa: Fa): TaxSummaryTypes[] {
   return summary;
 }
 
+
+
+

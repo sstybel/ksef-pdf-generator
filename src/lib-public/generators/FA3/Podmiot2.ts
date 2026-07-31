@@ -72,3 +72,6 @@ export function generatePodmiot2(podmiot2: Podmiot2): Content[] {
   return result;
 }
 
+
+
+

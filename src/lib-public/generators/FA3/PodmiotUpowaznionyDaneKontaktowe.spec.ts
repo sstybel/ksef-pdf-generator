@@ -77,3 +77,6 @@ describe(generatePodmiotUpowaznionyDaneKontaktowe.name, () => {
   });
 });
 
+
+
+

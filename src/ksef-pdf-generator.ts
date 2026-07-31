@@ -148,6 +148,7 @@ Options:
   [-e], [--emo]                               Show emoticons in on-screen messages
   [-q], [--quiet]                             Quiet mode, does not display messages on the screen
   [-w], [--overwrite]                         Overwrite the PDF invoice file if it exists (default: do not overwrite the PDF invoice file if it exists)
+  [-l], [--language] [<language>]             Language for PDF invoice generation (default: pl, available: pl (Polish), en (English), de (German))
   -h, --help                                  Show this help message
 
 Attention:
@@ -179,6 +180,7 @@ Example:
   let is_linux = false;
   let inputFiles = [];
   let pdf;
+  let language: string = 'pl';
 
   await i18nReady;
   
@@ -200,6 +202,12 @@ Example:
       is_e = true;
     } else if (arg === '-q' || arg === '--quiet') {
       is_q = true;
+    } else if (arg === '-l' || arg === '--language') {
+      language = args[++i];
+      language = language.toLowerCase();
+      if (!['pl', 'en', 'de'].includes(language)) {
+        language = 'pl';
+      }
     }  else if (arg === '-w' || arg === '--overwrite') {
       is_w = true;
     } else if (!arg.startsWith('-')) {
@@ -389,17 +397,17 @@ ${str_copyright}
 
         switch (ksefVersion) {
           case 'FA (1)':
-            pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data', language);
             break;
           case 'FA (2)':
-            pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data', language);
             break;
           case 'FA (3)':
-            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data', language);
             break;
           case 'FA_RR (1)':
           case 'FA_RR(1)':
-            pdf = generateFARR((xml as any).Faktura as FaRR, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateFARR((xml as any).Faktura as FaRR, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data', language);
           default:
             if (is_e) { sh_e = '❌ '; }
             if (!is_q) console.error(`${sh_e}Unhandled invoice version: ${ksefVersion}`);

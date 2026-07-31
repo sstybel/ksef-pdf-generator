@@ -107,3 +107,6 @@ export function generateWarunkiTransakcji(warunkiTransakcji: WarunkiTransakcji |
   return createSection(table, true);
 }
 
+
+
+

@@ -611,3 +611,6 @@ describe(generateSzczegoly.name, () => {
   });
 });
 
+
+
+

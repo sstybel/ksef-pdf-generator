@@ -232,3 +232,6 @@ describe(generujRachunekBankowy.name, () => {
     });
   });
 });
+
+
+

@@ -183,3 +183,6 @@ describe(generateSzczegoly.name, () => {
   });
 });
 
+
+
+

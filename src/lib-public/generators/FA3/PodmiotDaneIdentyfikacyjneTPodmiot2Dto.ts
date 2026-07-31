@@ -37,3 +37,6 @@ export function generateDaneIdentyfikacyjneTPodmiot2Dto(
   return result;
 }
 
+
+
+

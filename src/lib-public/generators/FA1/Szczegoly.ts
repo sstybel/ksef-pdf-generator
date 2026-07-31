@@ -176,3 +176,6 @@ function generateFakturaZaliczkowa(fakturaZaliczkowa: FP[] | undefined, i18n: an
   return table;
 }
 
+
+
+

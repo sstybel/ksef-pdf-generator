@@ -40,3 +40,6 @@ export function generatePodmiotUpowazniony(podmiotUpowazniony: PodmiotUpowaznion
   return result;
 }
 
+
+
+

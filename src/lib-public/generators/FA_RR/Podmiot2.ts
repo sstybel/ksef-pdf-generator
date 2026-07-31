@@ -42,3 +42,6 @@ export function generatePodmiot2(podmiot2: Podmiot1Class): Content[] {
   return result;
 }
 
+
+
+

@@ -44,3 +44,6 @@ export function generatePodmioty(invoice: FaRR): Content[] {
   return createSection(result, true, [0, 0, 0, 0]);
 }
 
+
+
+

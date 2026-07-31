@@ -19,11 +19,14 @@ import i18n from 'i18next';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
-export function generateFARR(invoice: FaRR, additionalData: AdditionalDataTypes, dataUri?: string, filename?: string, dateInv?: Date, dateInvStor?: Date, description?: string, relationship?: string): TCreatedPdf {
+export function generateFARR(invoice: FaRR, additionalData: AdditionalDataTypes, dataUri?: string, filename?: string, dateInv?: Date, dateInvStor?: Date, description?: string, relationship?: string, language?: string): TCreatedPdf {
+  i18n.changeLanguage(language ?? 'pl');
+
   const docDefinition: TDocumentDefinitions = {
     ...generateWatermark(additionalData?.watermark),
     version: '1.7',
     subset: 'PDF/A-3',
+    tagged: true,
     content: [
       ...generateNaglowek(invoice.FakturaRR, additionalData),
       generateDaneFaKorygowanej(invoice.FakturaRR),

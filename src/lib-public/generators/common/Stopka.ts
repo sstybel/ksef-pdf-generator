@@ -62,7 +62,7 @@ export function generateStopka(
     ),
   ];
 
-  return createSection(result, false);
+  return createSection(result, false, [0, 0, 0, 0]);
 }
 
 function generateWZ(wz?: FP[]): Content[] {
@@ -217,4 +217,6 @@ function generateQR2CodeData(additionalData?: AdditionalDataTypes): Content[] {
   }
   return createSection(result, true);
 }
+
+
 

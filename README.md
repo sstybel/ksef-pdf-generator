@@ -38,6 +38,26 @@ In version [**1.7.0 releases**](https://github.com/sstybel/ksef-pdf-generator/re
 
 In version [**1.8.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.8.0), includes bug fixes and updates to the code based on version [**1.1.19**](https://github.com/CIRFMF/ksef-pdf-generator/releases/tag/1.1.19) from the fork **https://github.com/CIRFMF/ksef-pdf-generator** ([**@CIRF**](https://github.com/CIRFMF)) and add fix bug with double-escaped ampersands implemented by [**@FoolFresco (Vitalii Tanchuk)**](https://github.com/FoolFresco) 👍.
 
+In version [**1.9.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.9.0), includes bug fixes and updates to the code based on version [**1.1.30**](https://github.com/CIRFMF/ksef-pdf-generator/releases/tag/1.1.30) from the fork **https://github.com/CIRFMF/ksef-pdf-generator** ([**@CIRF**](https://github.com/CIRFMF)). Full list of changes:
+
+**Added**
+* Added `configureFonts()`. A method for registering a custom font.
+* Added the date the **KSeF** number was assigned.
+* Translation of KSeF invoices into English (**en**) and German (**de**). The default translation is in Polish (**pl**).
+
+**Updated**
+* Standardized the decimal separator for the OSS tax rate.
+* Corrected the description for the UU_IDZ field.
+* Standardized the column names for procedure designations.
+* The naming convention for the total amount due in adjustments has been standardized.
+* The name "simplified three-party transaction" for field P_23 has been changed.
+* Date formatting in annotations for intra-Community supplies of new means of transport has been corrected.
+* The decimal separator for the ZZP rate has been standardized.
+* The decimal separator for the excise tax amount has been standardized.
+* An extra blank page at the end of the invoice preview has been removed.
+* The decimal separator in the "Quantity" column of the order table has been standardized.
+* A currency code has been added to the order summary and payment amounts (advance payments).
+
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
 &nbsp;
@@ -56,6 +76,7 @@ In version [**1.8.0 releases**](https://github.com/sstybel/ksef-pdf-generator/re
 * [`-e`], [`--emo`] - Show emoticons in on-screen messages
 * [`-q`], [`--quiet`] - Quiet mode, does not display messages on the screen
 * [`-w`], [`--overwrite`] - Overwrite the PDF invoice file if it exists (default: do not overwrite the PDF invoice file if it exists)
+* [`-l`], [`--language`] [`<language>`] - Language for **PDF** invoice generation (default: **pl**, available: **pl** (**Polish**), **en** (**English**), **de** (**German**))
 * [`-h`], [`--help`] - Display this help message
 
 **Notes:**

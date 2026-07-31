@@ -83,3 +83,6 @@ export function generateCorrectedContent(podmiot: Podmiot1Class | Podmiot1KClass
   return result;
 }
 
+
+
+

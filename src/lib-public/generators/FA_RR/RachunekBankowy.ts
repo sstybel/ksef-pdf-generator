@@ -71,3 +71,6 @@ export const generujRachunekBankowy = (accounts?: RachunekBankowy[], title?: str
 
   return createSection(result, false, [0, 0, 0, 0]);
 };
+
+
+

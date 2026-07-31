@@ -26,14 +26,18 @@ import i18n from 'i18next';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
-export function generateFA1(invoice: Faktura, additionalData: AdditionalDataTypes, dataUri?: string, filename?: string, dateInv?: Date, dateInvStor?: Date, description?: string, relationship?: string): TCreatedPdf {
+export function generateFA1(invoice: Faktura, additionalData: AdditionalDataTypes, dataUri?: string, filename?: string, dateInv?: Date, dateInvStor?: Date, description?: string, relationship?: string, language?: string): TCreatedPdf {
   const isKOR_RABAT: boolean =
     invoice.Fa?.RodzajFaktury?._text == TRodzajFaktury.KOR && hasValue(invoice.Fa?.OkresFaKorygowanej);
   const rabatOrRowsInvoice: Content = isKOR_RABAT ? generateRabat(invoice.Fa!) : generateWiersze(invoice.Fa!);
+
+  i18n.changeLanguage(language ?? 'pl');
+
   const docDefinition: TDocumentDefinitions = {
     ...generateWatermark(additionalData?.watermark),
     version: '1.7',
     subset: 'PDF/A-3',
+    tagged: true,
     content: [
       ...generateNaglowek(invoice.Fa, additionalData),
       generateDaneFaKorygowanej(invoice.Fa),
