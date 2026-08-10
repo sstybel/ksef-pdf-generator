@@ -169,5 +169,3 @@ describe(generatePodsumowanieStawekPodatkuVat.name, () => {
 });
 
 
-
-

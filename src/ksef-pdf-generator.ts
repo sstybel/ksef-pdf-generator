@@ -14,6 +14,7 @@ import Base64url from "crypto-js/enc-base64url"
 import packageInfo from '../package.json';
 import SHA256 from "crypto-js/sha256";
 import os from 'node:os';
+import i18next from 'i18next';
 
 interface ksefSeller {
   nip: string;
@@ -395,19 +396,21 @@ ${str_copyright}
         if (is_e) { sh_e = '🔧 '; }
         if (!is_q) console.log(`${sh_e}Generating PDF...`);
 
+        i18next.changeLanguage(language ?? 'pl');
+
         switch (ksefVersion) {
           case 'FA (1)':
-            pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data', language);
+            pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
             break;
           case 'FA (2)':
-            pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data', language);
+            pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
             break;
           case 'FA (3)':
-            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data', language);
+            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
             break;
           case 'FA_RR (1)':
           case 'FA_RR(1)':
-            pdf = generateFARR((xml as any).Faktura as FaRR, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data', language);
+            pdf = generateFARR((xml as any).Faktura as FaRR, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
           default:
             if (is_e) { sh_e = '❌ '; }
             if (!is_q) console.error(`${sh_e}Unhandled invoice version: ${ksefVersion}`);

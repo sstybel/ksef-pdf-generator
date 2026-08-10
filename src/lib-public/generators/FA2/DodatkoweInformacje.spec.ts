@@ -91,5 +91,3 @@ describe(generateDodatkoweInformacje.name, () => {
 });
 
 
-
-

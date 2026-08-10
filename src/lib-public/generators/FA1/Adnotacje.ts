@@ -305,5 +305,3 @@ function addToColumn(
 }
 
 
-
-

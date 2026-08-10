@@ -127,5 +127,3 @@ describe('generateAdnotacje - additional coverage', () => {
 });
 
 
-
-

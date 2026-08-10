@@ -276,5 +276,3 @@ function addToColumn(
 }
 
 
-
-

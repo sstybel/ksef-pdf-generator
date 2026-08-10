@@ -181,5 +181,3 @@ export function generateZamowienie(
   ];
 }
 
-
-

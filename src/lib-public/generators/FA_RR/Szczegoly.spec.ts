@@ -115,5 +115,3 @@ describe(generateSzczegoly.name, () => {
 });
 
 
-
-

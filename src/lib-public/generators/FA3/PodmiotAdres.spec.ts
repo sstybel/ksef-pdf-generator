@@ -69,5 +69,3 @@ describe(generatePodmiotAdres.name, () => {
 });
 
 
-
-

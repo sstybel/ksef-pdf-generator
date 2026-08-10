@@ -168,5 +168,3 @@ describe(generatePrzewoznik.name, () => {
 });
 
 
-
-

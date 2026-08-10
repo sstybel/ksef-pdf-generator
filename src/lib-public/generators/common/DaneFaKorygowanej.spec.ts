@@ -90,5 +90,3 @@ describe('generateDaneFaKorygowanej', () => {
   });
 });
 
-
-

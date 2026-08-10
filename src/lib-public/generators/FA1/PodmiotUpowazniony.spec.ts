@@ -44,5 +44,3 @@ describe(generatePodmiotUpowazniony.name, () => {
 });
 
 
-
-

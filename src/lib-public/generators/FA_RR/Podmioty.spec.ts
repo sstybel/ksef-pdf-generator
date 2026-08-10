@@ -83,5 +83,3 @@ describe(generatePodmioty.name, () => {
 });
 
 
-
-

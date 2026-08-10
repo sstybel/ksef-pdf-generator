@@ -508,5 +508,3 @@ describe(generateTransport.name, () => {
 });
 
 
-
-

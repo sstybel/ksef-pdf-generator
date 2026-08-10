@@ -32,5 +32,3 @@ export function generateDaneIdentyfikacyjne(daneIdentyfikacyjne: DaneIdentyfikac
 }
 
 
-
-

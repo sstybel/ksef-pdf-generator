@@ -119,5 +119,3 @@ describe(generatePlatnosc.name, () => {
 });
 
 
-
-

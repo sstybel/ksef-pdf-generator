@@ -58,6 +58,15 @@ In version [**1.9.0 releases**](https://github.com/sstybel/ksef-pdf-generator/re
 * The decimal separator in the "Quantity" column of the order table has been standardized.
 * A currency code has been added to the order summary and payment amounts (advance payments).
 
+In version [**1.10.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.10.0), includes bug fixes and updates to the code based on version [**1.1.31**](https://github.com/CIRFMF/ksef-pdf-generator/releases/tag/1.1.31) from the fork **https://github.com/CIRFMF/ksef-pdf-generator** ([**@CIRF**](https://github.com/CIRFMF)). Full list of changes:
+
+**Added**
+* Added the ability to display all invoice line items in a bulk adjustment.
+
+**Updated**
+* Modified the visibility of field P_15; it is now always displayed.
+* Fixed an issue with generating translations of order line items in languages other than Polish (i.e., en - English, de - German)
+
 ![Example Screen-Shot ](https://github.com/sstybel/ksef-pdf-generator/blob/main/images/screen01.png)
 
 &nbsp;

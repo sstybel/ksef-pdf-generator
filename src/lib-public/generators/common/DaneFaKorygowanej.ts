@@ -116,5 +116,3 @@ function generateCorrectiveData(data: DaneFaKorygowanej, column: Content[]): voi
   }
 }
 
-
-
