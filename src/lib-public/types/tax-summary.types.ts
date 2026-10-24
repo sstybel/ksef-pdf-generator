@@ -6,3 +6,4 @@ export interface TaxSummaryTypes {
   gross?: string | number;
   taxPLN?: string | number;
 }
+

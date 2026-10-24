@@ -205,3 +205,11 @@ function generateFakturaZaliczkowa(fakturaZaliczkowaData: ObjectKeysOfFP[] | und
 }
 
 
+
+
+
+
+
+
+
+

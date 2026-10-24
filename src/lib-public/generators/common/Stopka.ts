@@ -218,3 +218,11 @@ function generateQR2CodeData(additionalData?: AdditionalDataTypes): Content[] {
   return createSection(result, true);
 }
 
+
+
+
+
+
+
+
+

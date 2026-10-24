@@ -4,7 +4,7 @@ import * as FA2Generator from './FA2-generator';
 import * as FA3Generator from './FA3-generator';
 import { generateInvoice } from './generate-invoice';
 import { AdditionalDataTypes } from './types/common.types';
-import * as XMLParser from '@shared//XML-parser';
+import * as XMLParser from '../shared//XML-parser';
 
 describe('generateInvoice', () => {
   const mockBlob = new Blob(['mock pdf content'], { type: 'application/pdf' });
@@ -100,3 +100,7 @@ describe('generateInvoice', () => {
     expect(getBlobMock).toHaveBeenCalled();
   });
 });
+
+
+
+

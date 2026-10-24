@@ -34,3 +34,11 @@ describe('generatePrzewoznik', () => {
 });
 
 
+
+
+
+
+
+
+
+

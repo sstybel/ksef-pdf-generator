@@ -625,3 +625,11 @@ describe(generateSzczegoly.name, () => {
 });
 
 
+
+
+
+
+
+
+
+

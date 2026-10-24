@@ -27,3 +27,7 @@ export function configureFonts(fontConfig: FontConfig): void {
 export function getDefaultFontName(): string | undefined {
   return defaultFontName;
 }
+
+
+
+

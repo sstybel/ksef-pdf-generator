@@ -297,3 +297,4 @@ export interface FakturaAttributes {
   xsi?: string;
   schemaLocation?: string;
 }
+

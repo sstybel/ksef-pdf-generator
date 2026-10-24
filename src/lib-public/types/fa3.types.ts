@@ -382,3 +382,4 @@ export interface FakturaAttributes {
   'xmlns:xsi'?: string;
   'xsi:schemaLocation'?: string;
 }
+

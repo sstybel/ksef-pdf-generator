@@ -28,3 +28,4 @@ export interface DaneIdentyfikacyjneTPodmiot2Dto {
   NrID?: FP;
   NrVatUE?: FP;
 }
+

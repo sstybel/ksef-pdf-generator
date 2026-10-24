@@ -226,3 +226,11 @@ describe(generujRachunekBankowy.name, () => {
 });
 
 
+
+
+
+
+
+
+
+

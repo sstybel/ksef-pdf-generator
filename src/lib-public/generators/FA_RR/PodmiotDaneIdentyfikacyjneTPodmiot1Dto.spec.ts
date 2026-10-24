@@ -39,3 +39,11 @@ describe(generateDaneIdentyfikacyjneTPodmiot1Dto.name, () => {
 });
 
 
+
+
+
+
+
+
+
+

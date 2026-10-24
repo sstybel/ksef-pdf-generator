@@ -25,3 +25,7 @@ export async function generatePDFUPO(file: File): Promise<Blob> {
 
   return pdfMake.createPdf(docDefinition).getBlob();
 }
+
+
+
+

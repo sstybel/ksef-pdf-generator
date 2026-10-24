@@ -423,7 +423,8 @@
       "partialPayMechanism": "Split payment mechanism",
       "reverseTax": "Reverse charge",
       "selfInvoice": "Self-billing",
-      "threePartsSimplerMethod": "Simplified triangular procedure",
+      "simplifiedWeInfoiceLabel": "VAT: ",
+      "simplifiedWeInfoice": "Simplified EC invoice under Articles 135-138 of the VAT Act / Article 141 of Directive 2006/112/EC. The tax on the supply made will be settled by the last taxable person in the chain of VAT.",
       "transportApprovalDate": "Date of approval of the new means of transport for use",
       "transportBrand": "Brand of the new means of transport",
       "transportColor": "Color of the new means of transport",
@@ -437,9 +438,7 @@
       "usePermissionDate": "Date of permission for use",
       "vat22DocumentNotRequired": "No obligation to issue VAT-22 document",
       "vat22DocumentRequired": "Obligation to issue VAT-22 document exists",
-      "vin": "VIN number",
-      "simplifiedWeInfoiceLabel": "VAT: ",
-      "simplifiedWeInfoice": "Simplified EC invoice under Articles 135-138 of the VAT Act / Article 141 of Directive 2006/112/EC. The tax on the supply made will be settled by the last taxable person in the chain of VAT."
+      "vin": "VIN number"
     },
     "attachment": {
       "blockHeader": "Data block header: ",
@@ -516,8 +515,8 @@
       "totalValue": "Total discount value: ",
       "unit": "Unit",
       "cn": "CN",
-      "currencyRate": "Currency Rate",
-      "exciseTaxAmount": "Excise Tax Amount",
+      "currencyRate": "Exchange rate",
+      "exciseTaxAmount": "Excise tax amount",
       "gtin": "GTIN",
       "gtu": "GTU",
       "index": "Index",
@@ -528,21 +527,20 @@
       "pkob": "PKOB",
       "pkwiu": "PKWiU",
       "procedure": "Procedure",
-      "productMarker": "Marker for goods or services as per Annex 15 to the Act",
-      "taxAmount": "Tax Amount",
-      "taxRate": "Tax Rate",
+      "productMarker": "Tag for a good or service listed in Annex No. 15 to the Act",
+      "taxAmount": "Tax amount",
+      "taxRate": "Tax rate",
       "uuid": "UU_ID",
       "discount": "Discount",
       "grossSalesValue": "Gross sales value",
-      "getOrMakeDate": "Delivery / performance date"
+      "getOrMakeDate": "Delivery date / completion date"
     },
     "footer": {
       "generatedIn": "Generated in: ",
       "margin": "margin",
-      "invoiceFooter": "Invoice footer",
-      "appName": "",
+      "pagesTotal": "of",
       "version": "version",
-      "pagesTotal": "of"
+      "appName": "KSeF PDF Generator"
     },
     "header": {
       "advance": "Advance invoice",
@@ -554,14 +552,14 @@
       "correctionSettlement": "Settlement corrective invoice",
       "invoiceNumberLabel": "Invoice Number:",
       "ksefNumberLabel": "KSeF Number:",
+      "acquisitionDate": "KSeF number assignment date:",
       "ksefPart1": "National System ",
       "ksefPart2": "e",
       "ksefPart3": "-Invoices",
       "primalInvoiceVatRr": "Original VAT RR invoice",
       "settlement": "Settlement invoice",
       "simplified": "Simplified invoice",
-      "vat": "Standard invoice",
-      "acquisitionDate": "KSeF number assignment date:"
+      "vat": "Standard invoice"
     },
     "information": {
       "header": "Other information",
@@ -597,9 +595,9 @@
       "taxRate": "Tax rate",
       "totalAmountDue": "Total amount due: ",
       "uniqueRowNumber": "Unique row number",
-      "unit": "Unit",
       "uuid": "UU_ID",
-      "uuidz": "UU_IDZ"
+      "uuidz": "UU_IDZ",
+      "unit": "Unit"
     },
     "payment": {
       "bankAccountNumber": "Bank account number",
@@ -697,17 +695,19 @@
       "qualityDesc": "Class/quality description",
       "quantity": "Quantity",
       "remainingAmount": "Remaining amount to be paid: ",
+      "remainingAmountCorrection": "Correction of remaining amount to be paid: ",
       "stateBefore": "State before",
       "taxRate": "Tax rate",
       "totalAmountDue": "Total amount due: ",
+      "totalAmountDueCorrection": "Correction of total amount due: ",     
       "uniqueRowNumber": "Unique row number",
       "unit": "Unit",
       "unitPrice": "Unit price",
+      "uuid": "UU_ID",
+      "uuidz": "UU_IDZ",
       "valueZZP": "Value with ZZP",
       "vatSalesValue": "VAT sales value",
-      "wageZZP": "ZZP rate",
-      "uuid": "UU_ID",
-      "uuidz": "UU_IDZ"
+      "wageZZP": "ZZP rate"
     },
     "settlement": {
       "chargeReason": "Reason for charge",
@@ -718,7 +718,8 @@
       "toPay": "To pay: ",
       "toSettle": "To settle: ",
       "totalCharges": "Total charges: ",
-      "totalDeductions": "Total deductions: "
+      "totalDeductions": "Total deductions: ",
+      "amount": "Amount"
     },
     "subject1": {
       "address": "Address",
@@ -924,6 +925,11 @@
     }
   },
   "pef": {
+    "from": "from",
+    "to": "to",
+    "after": "State before correction",
+    "before": "State after correction",
+    "sum": "Sum",
     "invoiceHeader": {
       "invoice": "INVOICE",
       "correctiveInvoice": "CORRECTIVE INVOICE",
@@ -939,13 +945,21 @@
       "orderReferenceId": "Buyer's order number",
       "orderReferenceSalesOrderId": "Sales order number",
       "receiptDocumentReferenceId": "Receipt advice number",
-      "note": "General document notes"
+      "note": "General document notes",
+      "accountingCost": "Place of cost generation",
+      "invoiceDocumentReference": {
+        "issueDate": "Issue date of the invoice being corrected",
+        "id": "Number of the invoice being corrected"
+      }
     },
     "customer": {
       "header": "Customer"
     },
     "supplier": {
       "header": "Supplier"
+    },
+    "issuer": {
+      "header": "Issuer"
     },
     "contact": {
       "nameAndSurname": "Full name",
@@ -974,6 +988,9 @@
       "header": "Payee",
       "companyID": "Legal registration identifier",
       "partyIdentificationID": "Identifier"
+    },
+    "receiverParty": {
+      "header": "Recipient"
     },
     "invoiceDescrption": {
       "invoiceNumber": "Preceding invoice number",
@@ -1020,7 +1037,14 @@
       "taxInclusiveAmount": "Invoice total including VAT",
       "prepaidAmount": "Prepaid amount",
       "rndPrepaidAmount": "Rounding amount",
-      "payableAmount": "Amount due"
+      "payableAmount": "Amount due",
+      "settlementAmount": "Amount to be settled",
+      "additionalInvoiceGrossData": {
+        "Bilans": "Previous period balance amount",
+        "Faktury": "Pre-invoice issued in the settlement period",
+        "Raty": "Installments for equipment",
+        "Odsetki": "Interest on invoice"
+      }
     },
     "allowancecharge": {
       "allowanceHeader": "Document-level allowances",
@@ -1062,6 +1086,36 @@
       "invoiceItemId": "Billing item identifier in invoice line",
       "charges": "Charges",
       "discounts": "Discounts"
+    },
+    "taxCategory": {
+      "AE": "Reverse charge",
+      "E": "Exempt",
+      "S": "Standard",
+      "G": "Export",
+      "O": "Not subject to VAT",
+      "K": "Delivery within the EU",
+      "Z": "Zero",
+      "L": "Canary Islands general indirect tax",
+      "M": "Tax for producation, services and importation in Centua and Melilla",
+      "B": "Transferred (VAT), In Italy"
+    },
+    "diffSummary": {
+      "title": "Summary of Differences",
+      "table": {
+        "typeAndValue": "Tax type and rate",
+        "netto": "Net amount",
+        "discount": "Allowance amount"
+      }
+    },
+    "accountReckoning": {
+      "title": "Account Settlement",
+      "lineNo": "No.",
+      "name": "Name",
+      "description": "Description",
+      "period": "Period",
+      "costAmount": "Amount",
+      "periodFrom": "from",
+      "periodTo": "to"
     }
   }
 }

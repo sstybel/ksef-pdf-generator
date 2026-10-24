@@ -71,3 +71,7 @@ export function generateFA3(invoice: Faktura, additionalData: AdditionalDataType
 
   return pdfMake.createPdf(docDefinition);
 }
+
+
+
+

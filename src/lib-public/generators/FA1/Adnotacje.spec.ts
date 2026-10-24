@@ -127,3 +127,11 @@ describe('generateAdnotacje - additional coverage', () => {
 });
 
 
+
+
+
+
+
+
+
+

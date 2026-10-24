@@ -4,10 +4,16 @@ import { generateFA1 } from './lib-public/FA1-generator';
 import { generateFA2 } from './lib-public/FA2-generator';
 import { generateFA3 } from './lib-public/FA3-generator';
 import { generateFARR } from './lib-public/FARR-generator';
+import { generateBasicPEF } from './lib-public/PEF-basic-generator';
+import { generateCorrectivePEF } from './lib-public/PEF-corrective-generator';
+import { generateSpecPEF } from './lib-public/PEF-spec-generator';
 import { Faktura as Faktura1 } from './lib-public/types/fa1.types';
 import { Faktura as Faktura2 } from './lib-public/types/fa2.types';
 import { Faktura as Faktura3 } from './lib-public/types/fa3.types';
 import { FaRR } from './lib-public/types/FaRR.types';
+import { PEFBasicInvoice } from './lib-public/types/pef-invoice.types';
+import { PEFCorrectiveInvoice } from './lib-public/types/pef-invoice-corrective.types';
+import { PEFSpecInvoice } from './lib-public/types/pef-invoice-spec.types';
 import { AdditionalDataTypes } from './lib-public/types/common.types';
 import { i18nReady } from './lib-public/i18n/i18n-init';
 import Base64url from "crypto-js/enc-base64url"
@@ -411,6 +417,16 @@ ${str_copyright}
           case 'FA_RR (1)':
           case 'FA_RR(1)':
             pdf = generateFARR((xml as any).Faktura as FaRR, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            break;
+          case 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0':
+            pdf = generateBasicPEF((xml as any).Invoice as PEFBasicInvoice, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            break;
+          case 'urn:fdc:www.efaktura.gov.pl:ver2.0:corr_inv:ver4.0':
+            pdf = generateCorrectivePEF((xml as any).CreditNote as PEFCorrectiveInvoice, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            break;
+          case 'urn:fdc:www.efaktura.gov.pl:ver2.0:plinv:ver1.4':
+            pdf = generateSpecPEF((xml as any).Invoice as PEFSpecInvoice, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            break;
           default:
             if (is_e) { sh_e = '❌ '; }
             if (!is_q) console.error(`${sh_e}Unhandled invoice version: ${ksefVersion}`);

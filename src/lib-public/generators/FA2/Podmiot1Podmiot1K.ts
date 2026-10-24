@@ -79,3 +79,11 @@ export function generateCorrectedContent(podmiot: Podmiot1 | Podmiot1K, header: 
 }
 
 
+
+
+
+
+
+
+
+

@@ -10,3 +10,4 @@ export interface Podmiot3DaneIdentyfikacyjne {
   BrakID?: FP;
   Nazwa?: FP;
 }
+

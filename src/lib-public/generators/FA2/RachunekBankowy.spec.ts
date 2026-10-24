@@ -246,3 +246,11 @@ describe(generujRachunekBankowy.name, () => {
   });
 });
 
+
+
+
+
+
+
+
+

@@ -37,3 +37,11 @@ export function generatePodmiotUpowaznionyDaneKontaktowe(
 }
 
 
+
+
+
+
+
+
+
+

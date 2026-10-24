@@ -100,3 +100,11 @@ describe('generateRozliczenie', (): void => {
 });
 
 
+
+
+
+
+
+
+
+

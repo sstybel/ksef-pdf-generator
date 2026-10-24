@@ -67,3 +67,4 @@ export interface DeclarationAttributes {
   version?: string;
   encoding?: string;
 }
+

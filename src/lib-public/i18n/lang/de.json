@@ -423,7 +423,8 @@
       "partialPayMechanism": "geteilte Zahlung (spit payment)",
       "reverseTax": "Umkehrung der Steuerschuldnerschaft (Reverse Charge)",
       "selfInvoice": "Gutschriftverfahren (Self-Billing)",
-      "threePartsSimplerMethod": "Vereinfachtes Dreiecksgeschäft",
+      "simplifiedWeInfoiceLabel": "MwSt.: ",
+      "simplifiedWeInfoice": "Vereinfachte EG-Rechnung gemäß Art. 135-138 des MwSt.-Gesetzes / Art. 141 der Richtlinie 2006/112/EG. Die Steuer auf die erbrachte Lieferung wird vom letzten Steuerpflichtigen in der Kette der Mehrwertsteuer abgerechnet.",
       "transportApprovalDate": "Datum der Zulassung des neuen Beförderungsmittels",
       "transportBrand": "Marke des neuen Beförderungsmittels",
       "transportColor": "Farbe des neuen Beförderungsmittels",
@@ -437,9 +438,7 @@
       "usePermissionDate": "Datum der Nutzungsgenehmigung",
       "vat22DocumentNotRequired": "Keine Pflicht zur Ausstellung eines VAT-22-Dokuments",
       "vat22DocumentRequired": "Pflicht zur Ausstellung eines VAT-22-Dokuments besteht",
-      "vin": "VIN-Nummer",
-      "simplifiedWeInfoiceLabel": "MwSt.: ",
-      "simplifiedWeInfoice": "Vereinfachte EG-Rechnung gemäß Art. 135-138 des MwSt.-Gesetzes / Art. 141 der Richtlinie 2006/112/EG. Die Steuer auf die erbrachte Lieferung wird vom letzten Steuerpflichtigen in der Kette der Mehrwertsteuer abgerechnet."
+      "vin": "VIN-Nummer"
     },
     "attachment": {
       "blockHeader": "Datenblocküberschrift: ",
@@ -517,32 +516,31 @@
       "unit": "Einheit",
       "cn": "CN",
       "currencyRate": "Wechselkurs",
-      "exciseTaxAmount": "Verbrauchssteuerbetrag",
+      "exciseTaxAmount": "Verbrauchsteuerbetrag",
       "gtin": "GTIN",
       "gtu": "GTU",
       "index": "Index",
-      "netSalesValue": "Nettoverkaufswert",
-      "netUnitPrice": "Netto-Stückpreis",
-      "grossUnitPrice": "Brutto-Stückpreis",
+      "netSalesValue": "Nettoumsatz",
+      "netUnitPrice": "Nettostückpreis",
+      "grossUnitPrice": "Bruttostückpreis",
       "ossTaxRate": "OSS-Steuersatz",
       "pkob": "PKOB",
       "pkwiu": "PKWiU",
-      "verfahren": "Verfahren",
-      "productMarker": "Kennzeichnung für Waren oder Dienstleistungen gemäß Anhang 15 des Gesetzes",
-      "steuerbetrag": "Steuerbetrag",
+      "procedure": "Verfahren",
+      "productMarker": "Kennzeichnung einer Ware oder Dienstleistung, die in Anhang Nr. 15 des Gesetzes aufgeführt ist",
+      "taxAmount": "Steuersatz",
       "taxRate": "Steuersatz",
       "uuid": "UU_ID",
       "discount": "Rabatt",
       "grossSalesValue": "Bruttoumsatz",
-      "getOrMakeDate": "Liefer- bzw. Leistungsdatum"
+      "getOrMakeDate": "Liefertermin / Fertigstellungstermin"
     },
     "footer": {
       "generatedIn": "Erstellt in: ",
       "margin": "Marge",
-      "invoiceFooter": "Rechnungsfußzeile",
-      "appName": "",
+      "pagesTotal": "von",
       "version": "Version",
-      "pagesTotal": "von"
+      "appName": "KSeF PDF Generator"
     },
     "header": {
       "advance": "Abschlagsrechnung",
@@ -554,14 +552,14 @@
       "correctionSettlement": "Abrechnungs-Berichtigungsrechnung",
       "invoiceNumberLabel": "Rechnungsnummer:",
       "ksefNumberLabel": "KSeF-Nummer:",
+      "acquisitionDate": "Datum der KSeF-Nummer:",
       "ksefPart1": "Nationales System ",
       "ksefPart2": "e",
       "ksefPart3": "-Rechnungen",
       "primalInvoiceVatRr": "Original-MwSt.-RR-Rechnung",
       "settlement": "Abrechnungsrechnung",
       "simplified": "Vereinfachte Rechnung",
-      "vat": "Standardrechnung",
-      "acquisitionDate": "Datum der KSeF-Nummer:"
+      "vat": "Standardrechnung"
     },
     "information": {
       "header": "Sonstige Informationen",
@@ -598,7 +596,8 @@
       "totalAmountDue": "Gesamtzahlungsbetrag: ",
       "uniqueRowNumber": "Eindeutige Zeilennummer",
       "uuid": "UU_ID",
-      "uuidz": "UU_IDZ"
+      "uuidz": "UU_IDZ",
+      "unit": "Einheit"
     },
     "payment": {
       "bankAccountNumber": "Bankkontonummer",
@@ -696,17 +695,19 @@
       "qualityDesc": "Klasse-/Qualitätsbeschreibung",
       "quantity": "Menge",
       "remainingAmount": "Verbleibender Zahlungsbetrag: ",
+      "remainingAmountCorrection": "Korrektur des verbleibenden Zahlungsbetrags: ",
       "stateBefore": "Zustand vorher",
       "taxRate": "Steuersatz",
       "totalAmountDue": "Gesamtzahlungsbetrag: ",
+      "totalAmountDueCorrection": "Korrektur des Gesamtbetrags: ", 
       "uniqueRowNumber": "Eindeutige Zeilennummer",
       "unit": "Einheit",
       "unitPrice": "Stückpreis",
+      "uuid": "UU_ID",
+      "uuidz": "UU_IDZ",
       "valueZZP": "Wert mit ZZP",
       "vatSalesValue": "MwSt.-Umsatzwert",
-      "wageZZP": "ZZP-Satz",
-      "uuid": "UU_ID",
-      "uuidz": "UU_IDZ"
+      "wageZZP": "ZZP-Satz"
     },
     "settlement": {
       "chargeReason": "Belastungsgrund",
@@ -717,7 +718,8 @@
       "toPay": "Zu zahlen: ",
       "toSettle": "Zu verrechnen: ",
       "totalCharges": "Gesamtbelastungen: ",
-      "totalDeductions": "Gesamtabzüge: "
+      "totalDeductions": "Gesamtabzüge: ",
+      "amount": "Betrag"
     },
     "subject1": {
       "address": "Adresse",
@@ -923,6 +925,11 @@
     }
   },
   "pef": {
+    "from": "aus",
+    "to": "zu",
+    "after": "Zustand vor der Korrektur",
+    "before": "Zustand nach der Korrektur",
+    "sum": "Summe",
     "invoiceHeader": {
       "invoice": "RECHNUNG",
       "correctiveInvoice": "BERICHTIGUNGSRECHNUNG",
@@ -938,13 +945,21 @@
       "orderReferenceId": "Bestellnummer des Käufers",
       "orderReferenceSalesOrderId": "Versandavisonummer",
       "receiptDocumentReferenceId": "Empfangsbestätigungsnummer",
-      "note": "Allgemeine Anmerkungen zum Dokument"
+      "note": "Allgemeine Anmerkungen zum Dokument",
+      "accountingCost": "Ort der Kostenentstehung",
+      "invoiceDocumentReference": {
+        "issueDate": "Ausstellungsdatum der zu korrigierenden Rechnung",
+        "id": "Nummer der zu korrigierenden Rechnung"
+      }
     },
     "customer": {
       "header": "Kunde"
     },
     "supplier": {
       "header": "Lieferant"
+    },
+    "issuer": {
+      "header": "Aussteller"
     },
     "contact": {
       "nameAndSurname": "Vor- und Nachname",
@@ -973,6 +988,9 @@
       "header": "Zahlungsempfänger",
       "companyID": "Kennung der rechtlichen Registrierung",
       "partyIdentificationID": "Kennung"
+    },
+    "receiverParty": {
+      "header": "Empfänger"
     },
     "invoiceDescrption": {
       "invoiceNumber": "Nummer der vorangegangenen Rechnung",
@@ -1019,7 +1037,14 @@
       "taxInclusiveAmount": "Rechnungssumme inkl. MwSt.",
       "prepaidAmount": "Vorausbezahlter Betrag",
       "rndPrepaidAmount": "Rundungsbetrag",
-      "payableAmount": "Zahlbarer Betrag"
+      "payableAmount": "Zahlbarer Betrag",
+      "settlementAmount": "Abzurechnender Betrag",
+      "additionalInvoiceGrossData": {
+        "Bilans": "Saldo des vorherigen Zeitraums",
+        "Faktury": "Vorrechnung im Abrechnungszeitraum",
+        "Raty": "Raten für Equipment",
+        "Odsetki": "Zinsen auf Rechnung"
+      }
     },
     "allowancecharge": {
       "allowanceHeader": "Nachlässe auf Dokumentenebene",
@@ -1061,6 +1086,36 @@
       "invoiceItemId": "Abrechnungsartikelkennung in der Rechnungsposition",
       "charges": "Zuschläge",
       "discounts": "Nachlässe"
+    },
+    "taxCategory": {
+      "AE": "Steuerbefreit",
+      "E": "Ausgenommen",
+      "S": "Standard",
+      "G": "Exportieren",
+      "O": "Nicht mehrwertsteuerpflichtig",
+      "K": "Steuerbefreit (Kleinunternehmerregelung)",
+      "Z": "Zero",
+      "L": "Allgemeine indirekte Steuer auf den Kanarischen Inseln (eng.: Canary Islands general indirect tax)",
+      "M": "Steuern auf Produktion, Dienstleistungen und Einfuhren in Ceuta und Melilla(eng.: Tax for producation, services and importation in Centua and Melilla)",
+      "B": "Überwiesen (MwSt.), in Italien (eng.: Transferred (VAT), In Italy)"
+    },
+    "diffSummary": {
+      "title": "Zusammenfassung der Unterschiede",
+      "table": {
+        "typeAndValue": "Art und Wert",
+        "netto": "Nettobetrag",
+        "discount": "Rabatt"
+      }
+    },
+    "accountReckoning": {
+      "title": "Abrechnungspositionen",
+      "lineNo": "Lfd. Nr.",
+      "name": "Name",
+      "description": "Beschreibung",
+      "period": "Zeitraum",
+      "costAmount": "Betrag",
+      "periodFrom": "Von",
+      "periodTo": "Bis"
     }
   }
 }

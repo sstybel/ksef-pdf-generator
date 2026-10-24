@@ -250,3 +250,11 @@ describe(generujRachunekBankowy.name, () => {
   });
 });
 
+
+
+
+
+
+
+
+

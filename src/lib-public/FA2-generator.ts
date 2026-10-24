@@ -30,7 +30,6 @@ export function generateFA2(invoice: Faktura, additionalData: AdditionalDataType
   const isKOR_RABAT: boolean =
     invoice.Fa?.RodzajFaktury?._text == TRodzajFaktury.KOR && hasValue(invoice.Fa?.OkresFaKorygowanej);
   const rabatOrRowsInvoice: Content = isKOR_RABAT ? generateRabat(invoice.Fa!) : generateWiersze(invoice.Fa!);
-
   const docDefinition: TDocumentDefinitions = {
     ...generateWatermark(additionalData?.watermark),
     version: '1.7',
@@ -71,3 +70,7 @@ export function generateFA2(invoice: Faktura, additionalData: AdditionalDataType
 
   return pdfMake.createPdf(docDefinition);
 }
+
+
+
+

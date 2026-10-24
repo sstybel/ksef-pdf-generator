@@ -49,3 +49,7 @@ export function generateFARR(invoice: FaRR, additionalData: AdditionalDataTypes,
 
   return pdfMake.createPdf(docDefinition);
 }
+
+
+
+

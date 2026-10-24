@@ -179,3 +179,11 @@ export function generateDokumentUPO(potwierdzenie: Potwierdzenie): Content[] {
 }
 
 
+
+
+
+
+
+
+
+

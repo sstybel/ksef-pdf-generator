@@ -168,3 +168,11 @@ describe(generatePrzewoznik.name, () => {
 });
 
 
+
+
+
+
+
+
+
+

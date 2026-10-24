@@ -85,3 +85,11 @@ export const generujRachunekBankowy: (accounts?: Record<string, FP>[], title?: s
 };
 
 
+
+
+
+
+
+
+
+
