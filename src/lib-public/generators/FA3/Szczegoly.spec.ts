@@ -616,3 +616,4 @@ describe(generateSzczegoly.name, () => {
 
 
 
+

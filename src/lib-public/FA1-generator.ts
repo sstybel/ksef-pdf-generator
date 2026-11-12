@@ -78,3 +78,4 @@ export function generateFA1(invoice: Faktura, additionalData: AdditionalDataType
 
 
 
+

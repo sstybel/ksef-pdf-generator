@@ -54,3 +54,4 @@ export function generateSzczegoly(fa: Fa): Content[] {
 
 
 
+
