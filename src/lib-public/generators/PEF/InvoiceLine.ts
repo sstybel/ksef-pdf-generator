@@ -651,7 +651,3 @@ const columnDefs: ColumnDef<InvoiceLine | PEFInvoiceInvoiceLine | CreditNoteLine
 
 
 
-
-
-
-

@@ -171,7 +171,3 @@ describe(generatePodsumowanieStawekPodatkuVat.name, () => {
 
 
 
-
-
-
-

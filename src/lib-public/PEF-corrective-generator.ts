@@ -29,6 +29,8 @@ import { generateLegalMonetaryTotal } from './generators/PEF/LegalMonetaryTotal'
 import { generateInvoiceLine } from './generators/PEF/InvoiceLine';
 import { generateAccountReckoning } from './generators/PEF/AccountReckoning';
 import { SectionType } from '../shared/enums/pef-invoice.enum';
+import { generateInfo } from '../shared/utils/generate-info';
+import { generateWatermark } from '../shared/consts/watermark';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
@@ -68,8 +70,9 @@ export function generateCorrectivePEF(invoice: PEFCorrectiveInvoice, additionalD
     generateLegalMonetaryTotal(invoice, SectionType.Summary), // Podsumowanie faktury
     generateFooter(additionalData, invoice!.CustomizationID!) // Elementy struktury
   );
-
   const docDefinition: TDocumentDefinitions = {
+    info: generateInfo(additionalData?.creator),
+    ...generateWatermark(additionalData?.watermark),
     version: '1.7',
     subset: 'PDF/A-3',
     tagged: true,
@@ -87,6 +90,8 @@ export function generateCorrectivePEF(invoice: PEFCorrectiveInvoice, additionalD
 
   return pdfMake.createPdf(docDefinition);
 }
+
+
 
 
 

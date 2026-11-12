@@ -306,3 +306,8 @@ export interface Stopka extends StopkaFa1 {}
 
 export interface FakturaAttributes extends FakturaAttributesFa1 {}
 
+
+
+
+
+

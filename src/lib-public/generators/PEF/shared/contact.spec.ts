@@ -4,12 +4,12 @@ import { createContact } from './contact';
 import { createInlineLabelValue, createPEFSectionTitle } from '../../../../shared/functions-pef';
 import { Contact, ListAgencyNameEnum } from '../../../types/pef-invoice.types';
 
-vi.mock('../../../../../../shared/PDF-functions', () => ({
+vi.mock('../../../../shared/PDF-functions', () => ({
   formatText: vi.fn((text: string, style: string) => ({ text, style })),
   getText: vi.fn((data) => data?._text || data),
   hasValue: vi.fn((v) => !!v?._text),
 }));
-vi.mock('../../../../../../shared/functions-pef', () => ({
+vi.mock('../../../../shared/functions-pef', () => ({
   createPEFSectionTitle: vi.fn((text: string) => ({ text })),
   createInlineLabelValue: vi.fn((value: string, label: string | undefined) => ({
     text: `${label ?? ''}${label ? ' ' + value : value}`,
@@ -44,11 +44,6 @@ describe(createContact.name, () => {
     expect(createInlineLabelValue).toHaveBeenCalledWith('fake@email.com', 'E-mail', [0, 0, 0, 0]);
   });
 });
-
-
-
-
-
 
 
 

@@ -23,6 +23,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { TRodzajFaktury } from '../shared/consts/FA.const';
 import { Position } from '../shared/enums/common.enum';
 import i18n from 'i18next';
+import { generateInfo } from '../shared/utils/generate-info';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
@@ -32,10 +33,11 @@ export function generateFA3(invoice: Faktura, additionalData: AdditionalDataType
   const rabatOrRowsInvoice: Content = isKOR_RABAT ? generateRabat(invoice.Fa!) : generateWiersze(invoice.Fa!);
 
   const docDefinition: TDocumentDefinitions = {
+    info: generateInfo(additionalData?.creator),
     ...generateWatermark(additionalData?.watermark),
     version: '1.7',
     subset: 'PDF/A-3',
-    tagged: true,
+    tagged: true,    
     content: [
       ...generateNaglowek(invoice.Fa, additionalData, invoice.Zalacznik),
       generateDaneFaKorygowanej(invoice.Fa),
@@ -71,6 +73,8 @@ export function generateFA3(invoice: Faktura, additionalData: AdditionalDataType
 
   return pdfMake.createPdf(docDefinition);
 }
+
+
 
 
 

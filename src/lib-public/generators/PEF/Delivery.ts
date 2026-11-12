@@ -56,7 +56,3 @@ export function generateDelivery(deliveryArray: PEFInvoiceDelivery[]): Content[]
 
 
 
-
-
-
-

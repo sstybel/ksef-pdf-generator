@@ -373,7 +373,3 @@ describe(generateWiersze.name, () => {
 
 
 
-
-
-
-

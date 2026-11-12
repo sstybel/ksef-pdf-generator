@@ -123,7 +123,3 @@ describe(generatePlatnosc.name, () => {
 
 
 
-
-
-
-

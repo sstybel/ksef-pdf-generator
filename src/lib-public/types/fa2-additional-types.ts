@@ -29,3 +29,8 @@ export interface DaneIdentyfikacyjneTPodmiot2Dto {
   NrVatUE?: FP;
 }
 
+
+
+
+
+

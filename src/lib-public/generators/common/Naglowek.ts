@@ -103,7 +103,3 @@ export function generateNaglowek(
 
 
 
-
-
-
-

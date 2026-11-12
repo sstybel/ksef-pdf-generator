@@ -1,6 +1,6 @@
 {
   "name": "KSeF PDF Generator",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "lastyear": "2026",
   "scripts": {
     "ksef-pdf-generator": "tsx src/ksef-pdf-generator.ts"
@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "Sebastian Stybel",
   "license": "MIT",
-  "description": "KSeF PDF Generator - A tool for generating PDF documents from KSeF XML files.",
+  "description": "KSeF PDF Generator - A tool for generating PDF documents from KSeF XML invoices / ORC (UPO) files.",
   "homepage": "https://www.BONO-IT.pl/",
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "^4.50.1"
@@ -21,10 +21,10 @@
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^22.19.9",
     "@types/pdfmake": "^0.3.2",
-    "@typescript-eslint/eslint-plugin": "^8.40.0",
-    "@typescript-eslint/parser": "^8.40.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
     "crypto-js": "4.2.0",
-    "eslint": "^10.8.0",
+    "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-no-relative-import-paths": "^1.6.1",
     "eslint-plugin-prettier": "^5.5.4",
@@ -34,7 +34,7 @@
     "prettier": "^3.6.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.40.0",
+    "typescript-eslint": "^8.36.0",
     "vitest": "^4.1.8"
   },
   "dependencies": {

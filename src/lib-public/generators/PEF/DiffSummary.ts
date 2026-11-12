@@ -107,7 +107,3 @@ export function generateDiffSummary(invoice: PEFCorrectiveInvoice): Content[] {
 
 
 
-
-
-
-

@@ -7,6 +7,7 @@ import { generateFARR } from './lib-public/FARR-generator';
 import { generateBasicPEF } from './lib-public/PEF-basic-generator';
 import { generateCorrectivePEF } from './lib-public/PEF-corrective-generator';
 import { generateSpecPEF } from './lib-public/PEF-spec-generator';
+import { generatePDFUPO } from './lib-public/UPO-generator';
 import { Faktura as Faktura1 } from './lib-public/types/fa1.types';
 import { Faktura as Faktura2 } from './lib-public/types/fa2.types';
 import { Faktura as Faktura3 } from './lib-public/types/fa3.types';
@@ -14,6 +15,7 @@ import { FaRR } from './lib-public/types/FaRR.types';
 import { PEFBasicInvoice } from './lib-public/types/pef-invoice.types';
 import { PEFCorrectiveInvoice } from './lib-public/types/pef-invoice-corrective.types';
 import { PEFSpecInvoice } from './lib-public/types/pef-invoice-spec.types';
+import { Upo } from './lib-public/types/upo-v4_2.types';
 import { AdditionalDataTypes } from './lib-public/types/common.types';
 import { i18nReady } from './lib-public/i18n/i18n-init';
 import Base64url from "crypto-js/enc-base64url"
@@ -147,15 +149,16 @@ ${str_copyright}
 
     console.log(`Useage: ksef-pdf-generator.exe <ksef-xml-file> [options]
 
-A tool for generating PDF documents from KSeF XML files.
+A tool for generating PDF documents from KSeF XML invoices / ORC (UPO) files.
 
 Options:
   [-s], [--state] [X:\\path\\output-json.json]  Convert KSeF XML invoices to PDFs based on the state of the downloaded KSeF XML invoices by the tool KSeF XML Invoices Downloader 
   [-o], [--output] [<ksef-pdf-file>]          Path to output PDF file (default: like name XML file with changed extension to .pdf)
   [-e], [--emo]                               Show emoticons in on-screen messages
   [-q], [--quiet]                             Quiet mode, does not display messages on the screen
-  [-w], [--overwrite]                         Overwrite the PDF invoice file if it exists (default: do not overwrite the PDF invoice file if it exists)
-  [-l], [--language] [<language>]             Language for PDF invoice generation (default: pl, available: pl (Polish), en (English), de (German))
+  [-w], [--overwrite]                         Overwrite the PDF invoice / ORC (UPO) of KSeF file if it exists (default: do not overwrite the PDF invoice / ORC (UPO) of KSeFfile if it exists)
+  [-l], [--language] [<language>]             Language for PDF invoice / ORC (UPO) of KSeF generation (default: pl, available: pl (Polish), en (English), de (German))
+  [-m], [--watermark] [<watermark>]           Add watermark to PDF invoice or ORC (UPO) of KSeF (default: no watermark, available: any text)
   -h, --help                                  Show this help message
 
 Attention:
@@ -171,7 +174,9 @@ Attention:
 
 Example:
   ksef-pdf-generator.exe 0101010101-20260201-1A2B3C456D7E-F8.xml
-  ksef-pdf-generator.exe .\\assets\\invoice.xml -o output.pdf
+  ksef-pdf-generator.exe upo.xml
+  ksef-pdf-generator.exe .\\examples\\invoice.xml -o output.pdf
+  ksef-pdf-generator.exe .\\examples\\upo.xml -o upo.pdf
   ksef-pdf-generator.exe -s d:\\_ksef_\\ksef_invoices-output-json_20260217112540.json
 `);
     process.exit(0);
@@ -184,10 +189,13 @@ Example:
   let is_o = false;
   let is_s = false;
   let is_w = false;
+  let is_m = false;
   let is_linux = false;
+  let is_invoice = true;
   let inputFiles = [];
   let pdf;
   let language: string = 'pl';
+  let watermark_str: string = '';
 
   await i18nReady;
   
@@ -215,8 +223,12 @@ Example:
       if (!['pl', 'en', 'de'].includes(language)) {
         language = 'pl';
       }
-    }  else if (arg === '-w' || arg === '--overwrite') {
+    } else if (arg === '-w' || arg === '--overwrite') {
       is_w = true;
+    } else if (arg === '-m' || arg === '--metadata') {
+      is_m = true;
+      watermark_str = args[++i];
+      watermark_str = watermark_str.trim();
     } else if (!arg.startsWith('-')) {
       inputFile = path_linux(arg, is_linux);
       is_i  = true;
@@ -334,20 +346,12 @@ ${str_copyright}
         }
       }
 
+      i18next.changeLanguage(language ?? 'pl');
+
       const detectedNrKSeF = extractNrKSeFFromFilename(inputFile);
       const nrKSeF = detectedNrKSeF || 'NONE';
       let nrNIP = extractNIPFromKSeF(nrKSeF);
       let dataInvoice = extractDateFromKSeF(nrKSeF);
-
-      if (detectedNrKSeF) {
-        if (is_e) { sh_e = '🔍 '; }
-        if (!is_q) console.log(`${sh_e}Finding KSeF number from filename: ${nrKSeF}`);
-      } else {
-        if (is_e) { sh_e = 'ℹ️  '; }
-        if (!is_q) console.log(`${sh_e}No KSeF number detected in filename, using: "NONE"`);
-        nrNIP = '0101010101';
-        dataInvoice = '01-02-2026';
-      }
 
       try {
         if (is_e) { sh_e = '📄 '; }
@@ -362,74 +366,201 @@ ${str_copyright}
         const xmlhash = SHA256(xmlfile);
         const xmlhashb64 = Base64url.stringify(xmlhash);
 
-        let dataInvoiceFromXML = (xml as any)?.Faktura?.Fa?.P_1._text;
-        let dataInvoiceFromXML_dd = dataInvoiceFromXML.substring(8, 10);
-        let dataInvoiceFromXML_mm = dataInvoiceFromXML.substring(5, 7);
-        let dataInvoiceFromXML_yy = dataInvoiceFromXML.substring(0, 4);
-        dataInvoiceFromXML = dataInvoiceFromXML_dd + '-' + dataInvoiceFromXML_mm + '-' + dataInvoiceFromXML_yy;
+        const ksefVersionInvoice: any = (xml as any)?.Faktura?.Naglowek?.KodFormularza?._attributes?.kodSystemowy;
+        const ksefVersionPEF: any = (xml as any)?.Invoice?.ProfileID?._text ?? (xml as any)?.CreditNote?.ProfileID?._text;
+        const ksefVersionUPO: any = (xml as any)?.Potwierdzenie?._attributes?.xmlns
 
-        if (dataInvoice != dataInvoiceFromXML) {
-          dataInvoice = dataInvoiceFromXML;
+        const ksefVersion = ksefVersionInvoice ?? ksefVersionPEF ?? ksefVersionUPO;
+
+        let ksefVersionStr: string | undefined;
+        
+        let ksefVersionStrEng: string | undefined;
+
+        let ksefTypeStr: string | undefined = i18next.t('bonoit.ksefTypeInvoiceStr');
+
+        let ksefInvoicesUPOType: string | undefined = i18next.t('bonoit.ksefInvoiceStr');
+
+        const str_ver = `${packageInfo.version}`;
+        const str_author = `${packageInfo.author}`;
+        const str_appname = `${packageInfo.name}`;
+        const str_homepage = `${packageInfo.homepage}`;
+        const str_lastyear = `${packageInfo.lastyear}`;
+        const str_copyright = `Copyright (c) 2025 - ${str_lastyear} by ${str_author}, ${str_homepage}`;
+
+        let ksefCreatorStr: string | undefined = `${packageInfo.name} - ${i18next.t('invoice.footer.version')} ${packageInfo.version} - ${str_copyright}`;
+  
+        switch (ksefVersion) {
+          case 'FA (1)':
+            ksefVersionStr = 'FA (1)';
+            ksefVersionStrEng = ksefVersionStr;
+            break;
+          case 'FA (2)':
+            ksefVersionStr = 'FA (2)';
+            ksefVersionStrEng = ksefVersionStr;
+            break;
+          case 'FA (3)':
+            ksefVersionStr = 'FA (3)';
+            ksefVersionStrEng = ksefVersionStr;
+            break;
+          case 'FA_RR (1)':
+          case 'FA_RR(1)':
+            ksefVersionStr = 'FA RR (1)';
+            ksefVersionStrEng = ksefVersionStr;
+            break;
+          case 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0':
+            ksefVersionStr = i18next.t('bonoit.ksefVersionInvoicePEFBasicStr');
+            ksefVersionStrEng = i18next.t('bonoit.ksefVersionInvoicePEFBasicStrEng');
+            break;
+          case 'urn:fdc:www.efaktura.gov.pl:ver2.0:corr_inv:ver4.0':
+            ksefVersionStr = i18next.t('bonoit.ksefVersionInvoicePEFCorrectiveStr');
+            ksefVersionStrEng = i18next.t('bonoit.ksefVersionInvoicePEFCorrectiveStrEng');
+            break;
+          case 'urn:fdc:www.efaktura.gov.pl:ver2.0:plinv:ver1.4':
+            ksefVersionStr = i18next.t('bonoit.ksefVersionInvoicePEFSpecStr');
+            ksefVersionStrEng = i18next.t('bonoit.ksefVersionInvoicePEFSpecStrEng');
+            break;
+          case 'http://upo.schematy.mf.gov.pl/KSeF/v4-2':
+            is_invoice = false;
+            ksefTypeStr = i18next.t('bonoit.ksefTypeORCStr');
+            ksefVersionStr = i18next.t('bonoit.ksefVersionORC42Str');
+            ksefVersionStrEng = i18next.t('bonoit.ksefVersionORC42StrEng');
+            ksefInvoicesUPOType = i18next.t('bonoit.ksefORCStr');
+            break;
+          case 'http://upo.schematy.mf.gov.pl/KSeF/v4-3':
+            is_invoice = false;
+            ksefTypeStr = i18next.t('bonoit.ksefTypeORCStr');
+            ksefVersionStr = i18next.t('bonoit.ksefVersionORC43Str');
+            ksefVersionStrEng = i18next.t('bonoit.ksefVersionORC43StrEng');
+            ksefInvoicesUPOType = i18next.t('bonoit.ksefORCStr');
+            break;
+          default:
+            ksefVersionStr = undefined;
+            ksefVersionStrEng = ksefVersionStr;
+            break;
         }
 
-        let DataXML = Buffer.from(xmlfile, 'binary');
-        let DataBase64XML = DataXML.toString('base64');
-        let DataUri = `data:application/xml;base64,${DataBase64XML}`;
-
-        const qrCode = 'https://qr.ksef.mf.gov.pl/invoice/' + nrNIP + '/' + dataInvoice + '/' + xmlhashb64
-
-        if (is_e) { sh_e = '🔑 '; }
-        if (!is_q) console.log(`${sh_e}Hash SHA-256 file: ${xmlhash}`);
-        if (!is_q) console.log(`${sh_e}Hash SHA-256 file to Base64: ${xmlhashb64}`);
-        if (!is_q) console.log(`${sh_e}QR Code Link: ${qrCode}`);
-      
-        const ksefVersion: any = (xml as any)?.Faktura?.Naglowek?.KodFormularza?._attributes?.kodSystemowy;
+        const ksefAttachmentSuffixStr = i18next.t('bonoit.ksefAttachmentSuffixStr');
+        
+        let ksefAttachmentStr: string | undefined = ksefVersionStr + ' - ' + ksefAttachmentSuffixStr;
 
         if (!ksefVersion) {
           if (is_e) { sh_e = '❌ '; }
-          if (!is_q) console.error(sh_e + 'Error: Cannot determine invoice version (FA1/FA2/FA3)');
+          if (!is_q) console.error(sh_e + 'Error: Cannot determine ' + ksefTypeStr.toLowerCase() + ' version (' + ksefInvoicesUPOType + ')');
           process.exit(1);
         }
 
         if (is_e) { sh_e = '📋 '; }
-        if (!is_q) console.log(`${sh_e}Invoice version: ${ksefVersion}`);
+        if (!is_q) console.log(`${sh_e}${ksefTypeStr} version: ${ksefVersionStrEng}`);
 
-        const additionalData: AdditionalDataTypes = {
-          nrKSeF,
-          qrCode,
+        if (is_m) { 
+          if (is_e) { sh_e = '💧 '; }
+          if (!is_q) console.log(`${sh_e}Watermark: ${watermark_str}`);
+        }
+
+        let DataUri = '';
+        let additionalData: AdditionalDataTypes = { 
+          nrKSeF: '', 
+          acDate: '', 
+          qrCode: '', 
+          qr2Code: '', 
+          creator: '', 
+          watermark: ''
         };
+
+        if (is_invoice) {
+          if (detectedNrKSeF) {
+            if (is_e) { sh_e = '🔍 '; }
+            if (!is_q) console.log(`${sh_e}Finding KSeF number from filename: ${nrKSeF}`);
+          } else {
+            if (is_e) { sh_e = 'ℹ️  '; }
+            if (!is_q) console.log(`${sh_e}No KSeF number detected in filename, using: "NONE"`);
+            nrNIP = '0101010101';
+            dataInvoice = '01-02-2026';
+          }
+
+          let dataInvoiceFromXML = (xml as any)?.Faktura?.Fa?.P_1._text;
+          let dataInvoiceFromXML_dd = dataInvoiceFromXML.substring(8, 10);
+          let dataInvoiceFromXML_mm = dataInvoiceFromXML.substring(5, 7);
+          let dataInvoiceFromXML_yy = dataInvoiceFromXML.substring(0, 4);
+          dataInvoiceFromXML = dataInvoiceFromXML_dd + '-' + dataInvoiceFromXML_mm + '-' + dataInvoiceFromXML_yy;
+
+          let dataInvoiceKSeF = (xml as any)?.Faktura?.Naglowek?.DataWytworzeniaFa._text;
+          let dataInvoiceKSeF_dd = dataInvoiceKSeF.substring(8, 10);
+          let dataInvoiceKSeF_mm = dataInvoiceKSeF.substring(5, 7);
+          let dataInvoiceKSeF_yy = dataInvoiceKSeF.substring(0, 4);
+          dataInvoiceKSeF = dataInvoiceKSeF_dd + '.' + dataInvoiceKSeF_mm + '.' + dataInvoiceKSeF_yy;
+
+          if (dataInvoice != dataInvoiceFromXML) {
+            dataInvoice = dataInvoiceFromXML;
+          }
+
+          let DataXML = Buffer.from(xmlfile, 'binary');
+          let DataBase64XML = DataXML.toString('base64');
+          DataUri = `data:application/xml;base64,${DataBase64XML}`;
+
+          const qrCode = 'https://qr.ksef.mf.gov.pl/invoice/' + nrNIP + '/' + dataInvoice + '/' + xmlhashb64
+
+          if (is_e) { sh_e = '🔑 '; }
+          if (!is_q) console.log(`${sh_e}Hash SHA-256 file: ${xmlhash}`);
+          if (!is_q) console.log(`${sh_e}Hash SHA-256 file to Base64: ${xmlhashb64}`);
+          if (!is_q) console.log(`${sh_e}QR Code Link: ${qrCode}`);
+
+          additionalData = { 
+            nrKSeF: nrKSeF, 
+            acDate: dataInvoiceKSeF, 
+            qrCode: qrCode, 
+            qr2Code: qrCode, 
+            creator: ksefCreatorStr, 
+            watermark: watermark_str
+          };          
+        } else if (ksefTypeStr == 'ORC (UPO) of KSeF') {
+          let DataXML = Buffer.from(xmlfile, 'binary');
+          let DataBase64XML = DataXML.toString('base64');
+          DataUri = `data:application/xml;base64,${DataBase64XML}`;
+
+          additionalData = { 
+            nrKSeF: '', 
+            acDate: '', 
+            qrCode: '', 
+            qr2Code: '', 
+            creator: ksefCreatorStr, 
+            watermark: watermark_str
+          }; 
+        }
 
         if (is_e) { sh_e = '🔧 '; }
         if (!is_q) console.log(`${sh_e}Generating PDF...`);
 
-        i18next.changeLanguage(language ?? 'pl');
-
         switch (ksefVersion) {
           case 'FA (1)':
-            pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateFA1((xml as any).Faktura as Faktura1, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, ksefAttachmentStr, 'Data');
             break;
           case 'FA (2)':
-            pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateFA2((xml as any).Faktura as Faktura2, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, ksefAttachmentStr, 'Data');
             break;
           case 'FA (3)':
-            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateFA3((xml as any).Faktura as Faktura3, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, ksefAttachmentStr, 'Data');
             break;
           case 'FA_RR (1)':
           case 'FA_RR(1)':
-            pdf = generateFARR((xml as any).Faktura as FaRR, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateFARR((xml as any).Faktura as FaRR, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, ksefAttachmentStr, 'Data');
             break;
           case 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0':
-            pdf = generateBasicPEF((xml as any).Invoice as PEFBasicInvoice, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateBasicPEF((xml as any).Invoice as PEFBasicInvoice, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, ksefAttachmentStr, 'Data');
             break;
           case 'urn:fdc:www.efaktura.gov.pl:ver2.0:corr_inv:ver4.0':
-            pdf = generateCorrectivePEF((xml as any).CreditNote as PEFCorrectiveInvoice, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateCorrectivePEF((xml as any).CreditNote as PEFCorrectiveInvoice, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, ksefAttachmentStr, 'Data');
             break;
           case 'urn:fdc:www.efaktura.gov.pl:ver2.0:plinv:ver1.4':
-            pdf = generateSpecPEF((xml as any).Invoice as PEFSpecInvoice, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, 'Krajowy System e-Faktur - XML', 'Data');
+            pdf = generateSpecPEF((xml as any).Invoice as PEFSpecInvoice, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, ksefAttachmentStr, 'Data');
+            break;
+          case 'http://upo.schematy.mf.gov.pl/KSeF/v4-2':
+          case 'http://upo.schematy.mf.gov.pl/KSeF/v4-3':
+            pdf = generatePDFUPO((xml as any) as Upo, additionalData, DataUri, namefilexml, inputDateInv, inputDateInvStor, ksefAttachmentStr, 'Data');
             break;
           default:
             if (is_e) { sh_e = '❌ '; }
-            if (!is_q) console.error(`${sh_e}Unhandled invoice version: ${ksefVersion}`);
+            if (!is_q) console.error(`${sh_e}Unhandled ${ksefTypeStr.toLowerCase()} version: ${ksefVersion}`);
             process.exit(1);
         }
 

@@ -131,7 +131,3 @@ describe('generateAdnotacje - additional coverage', () => {
 
 
 
-
-
-
-

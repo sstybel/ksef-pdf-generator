@@ -66,7 +66,3 @@ describe(generatePlatnosc.name, () => {
 
 
 
-
-
-
-

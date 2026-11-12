@@ -54,7 +54,3 @@ describe(generateInvoiceHeader.name, () => {
 
 
 
-
-
-
-

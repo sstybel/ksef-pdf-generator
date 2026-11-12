@@ -11,3 +11,8 @@ export interface Podmiot3DaneIdentyfikacyjne {
   Nazwa?: FP;
 }
 
+
+
+
+
+

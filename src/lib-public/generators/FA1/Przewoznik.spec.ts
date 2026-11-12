@@ -38,7 +38,3 @@ describe('generatePrzewoznik', () => {
 
 
 
-
-
-
-

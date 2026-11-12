@@ -25,3 +25,8 @@ export interface TerminPlatnosciContent {
   TerminPlatnosci?: FP;
 }
 
+
+
+
+
+

@@ -173,7 +173,3 @@ describe(generateLegalMonetaryTotal.name, () => {
 
 
 
-
-
-
-

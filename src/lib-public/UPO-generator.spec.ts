@@ -2,10 +2,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { generatePDFUPO } from './UPO-generator';
 
-import * as XMLParser from '../shared//XML-parser';
-
 describe('generatePDFUPO', () => {
-  const dummyFile = new File(['dummy'], 'dummy.xml', { type: 'text/xml' });
   const dummyUpo = {
     Potwierdzenie: {
       field1: 'value1',
@@ -14,8 +11,6 @@ describe('generatePDFUPO', () => {
   };
 
   beforeEach(() => {
-    vi.spyOn(XMLParser, 'parseXML').mockResolvedValue(dummyUpo);
-
     const mockBlob = new Blob(['pdf content'], { type: 'application/pdf' });
     vi.spyOn(pdfMake, 'createPdf').mockImplementation(
       () =>
@@ -30,7 +25,7 @@ describe('generatePDFUPO', () => {
   });
 
   it('successfully generates a PDF blob', async () => {
-    const blob = await generatePDFUPO(dummyFile);
+    const blob = generatePDFUPO(dummyUpo as any).getBlob();
 
     expect(blob).toBeInstanceOf(Blob);
     const text = await new Promise<string>((resolve, reject) => {
@@ -38,19 +33,19 @@ describe('generatePDFUPO', () => {
 
       reader.onload = (): void => resolve(reader.result as string);
       reader.onerror = (): void => reject(reader.error);
-      reader.readAsText(blob);
+      reader.readAsText(blob as unknown as Blob);
     });
 
     expect(text).toContain('pdf content');
   });
 
-  it('calls parseXML with the input file', async () => {
-    const parseXMLSpy = vi.spyOn(XMLParser, 'parseXML');
-
-    await generatePDFUPO(dummyFile);
-    expect(parseXMLSpy).toHaveBeenCalledWith(dummyFile);
+  it('creates a PDF from the UPO', () => {
+    generatePDFUPO(dummyUpo as any);
+    expect(pdfMake.createPdf).toHaveBeenCalled();
   });
 });
+
+
 
 
 

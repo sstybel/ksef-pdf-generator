@@ -7,3 +7,8 @@ export interface TaxSummaryTypes {
   taxPLN?: string | number;
 }
 
+
+
+
+
+

@@ -2,6 +2,16 @@
 
 <a href="https://github.com/sstybel/ksef-pdf-generator/releases/latest"><img alt="Static Badge" src="https://img.shields.io/badge/download-red?style=for-the-badge&label=stable&color=%23FF0000&link=https%3A%2F%2Fgithub.com%2Fsstybel%2Fksef-pdf-generator%2Freleases%2Flatest"></a> ![GitHub Release](https://img.shields.io/github/v/release/sstybel/ksef-pdf-generator?sort=date&display_name=release&style=for-the-badge&logo=github&label=release&link=https%3A%2F%2Fgithub.com%2Fsstybel%2Fksef-pdf-generator) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/sstybel/ksef-pdf-generator/total?style=for-the-badge&logo=github&link=https%3A%2F%2Fgithub.com%2Fsstybel%2Fksef-pdf-generator)
 
+### [1.12.0]
+---
+In version [**1.12.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.12.0), includes bug fixes and updates to the code based on version [**1.1.48**](https://github.com/CIRFMF/ksef-pdf-generator/releases/tag/1.1.48) from the fork **https://github.com/CIRFMF/ksef-pdf-generator** ([**@CIRF**](https://github.com/CIRFMF)). Full list of changes:
+
+**Added**
+* An additional parameter has been added to the application command [`-m`], [`--watermark`] [`<watermark>`] - Add a watermark to the **PDF** invoice or ORC (**UPO**) of KSeF (default: no watermark; available: any text)
+* The ‘Producer’ and ‘Creator’ fields have been added for **PDF** visualisation metadata.
+* A watermark has been added for **PEF** and **UPO** invoices.
+* A **UPO** footer has been added.
+
 ### [1.11.0]
 ---
 In version [**1.11.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.11.0), includes bug fixes and updates to the code based on version [**1.1.46**](https://github.com/CIRFMF/ksef-pdf-generator/releases/tag/1.1.46) from the fork **https://github.com/CIRFMF/ksef-pdf-generator** ([**@CIRF**](https://github.com/CIRFMF)). Full list of changes:

@@ -32,6 +32,7 @@ Starting with version [**1.1.0 releases**](https://github.com/sstybel/ksef-pdf-g
 * [`-q`], [`--quiet`] - Quiet mode, does not display messages on the screen
 * [`-w`], [`--overwrite`] - Overwrite the PDF invoice file if it exists (default: do not overwrite the PDF invoice file if it exists)
 * [`-l`], [`--language`] [`<language>`] - Language for **PDF** invoice generation (default: **pl**, available: **pl** (**Polish**), **en** (**English**), **de** (**German**))
+* [`-m`], [`--watermark`] [`<watermark>`] - Add a watermark to the **PDF** invoice or ORC (UPO) of KSeF (default: no watermark; available: any text)
 * [`-h`], [`--help`] - Display this help message
 
 **Notes:**
@@ -191,6 +192,16 @@ In version [**1.11.0 releases**](https://github.com/sstybel/ksef-pdf-generator/r
 * The description regarding the number of parts in a **UPO** document has been corrected.
 * Debug mode has been disabled.
 * The version of **pdfmake** has been updated.
+
+### [1.12.0]
+---
+In version [**1.12.0 releases**](https://github.com/sstybel/ksef-pdf-generator/releases/tag/1.12.0), includes bug fixes and updates to the code based on version [**1.1.48**](https://github.com/CIRFMF/ksef-pdf-generator/releases/tag/1.1.48) from the fork **https://github.com/CIRFMF/ksef-pdf-generator** ([**@CIRF**](https://github.com/CIRFMF)). Full list of changes:
+
+**Added**
+* An additional parameter has been added to the application command [`-m`], [`--watermark`] [`<watermark>`] - Add a watermark to the **PDF** invoice or ORC (**UPO**) of KSeF (default: no watermark; available: any text)
+* The ‘Producer’ and ‘Creator’ fields have been added for **PDF** visualisation metadata.
+* A watermark has been added for **PEF** and **UPO** invoices.
+* A **UPO** footer has been added.
 
 ## Download
 

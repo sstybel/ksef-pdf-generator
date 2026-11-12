@@ -16,11 +16,13 @@ import { AdditionalDataTypes } from './types/common.types';
 import { FaRR } from './types/FaRR.types';
 import { generateWatermark } from '../shared/consts/watermark';
 import i18n from 'i18next';
+import { generateInfo } from '../shared/utils/generate-info';
 
 pdfMake.addVirtualFileSystem(pdfFonts);
 
 export function generateFARR(invoice: FaRR, additionalData: AdditionalDataTypes, dataUri?: string, filename?: string, dateInv?: Date, dateInvStor?: Date, description?: string, relationship?: string): TCreatedPdf {
   const docDefinition: TDocumentDefinitions = {
+    info: generateInfo(additionalData?.creator),
     ...generateWatermark(additionalData?.watermark),
     version: '1.7',
     subset: 'PDF/A-3',
@@ -49,6 +51,8 @@ export function generateFARR(invoice: FaRR, additionalData: AdditionalDataTypes,
 
   return pdfMake.createPdf(docDefinition);
 }
+
+
 
 
 

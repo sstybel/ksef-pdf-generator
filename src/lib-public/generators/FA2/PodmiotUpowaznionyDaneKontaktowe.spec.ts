@@ -82,7 +82,3 @@ describe(generatePodmiotUpowaznionyDaneKontaktowe.name, () => {
 
 
 
-
-
-
-

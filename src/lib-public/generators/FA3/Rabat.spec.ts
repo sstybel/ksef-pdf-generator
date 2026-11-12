@@ -266,7 +266,3 @@ describe(generateRabat.name, () => {
 
 
 
-
-
-
-

@@ -56,7 +56,3 @@ describe(generateInvoiceDescription.name, () => {
 
 
 
-
-
-
-

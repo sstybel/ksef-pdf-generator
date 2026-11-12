@@ -1117,5 +1117,22 @@ export const en = {
       periodFrom: 'from',
       periodTo: 'to'
     }
+  },
+  bonoit: {
+    ksefAttachmentSuffixStr: 'National e-Invoice System (KSeF) - XML',
+    ksefTypeInvoiceStr: 'Invoice of KSeF',
+    ksefInvoiceStr: 'FA1/FA2/FA3/FA RR/EIP (PEF)',
+    ksefTypeORCStr: 'ORC (UPO) of KSeF',
+    ksefVersionInvoicePEFBasicStr: 'EIP (PEF) Basic (1.0)',
+    ksefVersionInvoicePEFCorrectiveStr: 'EIP (PEF) Corrective (4.0)',
+    ksefVersionInvoicePEFSpecStr: 'EIP (PEF) Special (1.4)',
+    ksefVersionORC42Str: 'ORC (UPO 4.2) of KSeF',
+    ksefVersionORC43Str: 'ORC (UPO 4.3) of KSeF',
+    ksefORCStr: 'ORC (UPO) 4.2/4.3 of KSeF',
+    ksefVersionInvoicePEFBasicStrEng: 'EIP (PEF) Basic (1.0)',
+    ksefVersionInvoicePEFCorrectiveStrEng: 'EIP (PEF) Corrective (4.0)',
+    ksefVersionInvoicePEFSpecStrEng: 'EIP (PEF) Special (1.4)',
+    ksefVersionORC42StrEng: 'ORC (UPO 4.2) of KSeF',
+    ksefVersionORC43StrEng: 'ORC (UPO 4.3) of KSeF'
   }
 } as const;

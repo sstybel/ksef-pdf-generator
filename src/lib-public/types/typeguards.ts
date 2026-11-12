@@ -12,3 +12,8 @@ export function isPEFCorrective(invoice: PEFInvoice): invoice is PEFCorrectiveIn
   return 'CreditNoteTypeCode' in invoice;
 }
 
+
+
+
+
+
