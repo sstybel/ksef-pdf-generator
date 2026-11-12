@@ -225,7 +225,7 @@ Example:
       }
     } else if (arg === '-w' || arg === '--overwrite') {
       is_w = true;
-    } else if (arg === '-m' || arg === '--metadata') {
+    } else if (arg === '-m' || arg === '--watermark') {
       is_m = true;
       watermark_str = args[++i];
       watermark_str = watermark_str.trim();
